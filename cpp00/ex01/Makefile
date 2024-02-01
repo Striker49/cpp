@@ -1,10 +1,10 @@
-NAME = megaphone
+NAME = PhoneBook
 
 CC = c++
 
 CFLAGS = -Werror -Wextra -Wall -std=c++98
 
-SRC = megaphone.cpp
+SRC = PhoneBook.cpp
 
 OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))
 
