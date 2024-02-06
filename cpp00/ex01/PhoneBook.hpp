@@ -1,19 +1,31 @@
-#ifndef PHONEBOOK_HPP
+#pragma once
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <cctype>
+# define SET_TERM "\033[2J\033[H"
 
 class   Contact {
+public:
+    Contact(void);
+    ~Contact(void);
 
-private:
-    char    firstName;
-    // char    lastName;
-    // char    nickname;
-    // char    phoneNumber;
-    // char    darkestSecret;
+    std::string    firstName;
+    std::string    lastName;
+    std::string    nickname;
+    std::string    phoneNumber;
+    std::string    darkestSecret;
 };
 
 class PhoneBook {
-
+    int count;
+    int full;
 public:
-    Contact info;
-};
+    PhoneBook(void);
+    ~PhoneBook(void);
+    void    add(void);
+    void    search(void);
+    void    exitProgram(void);
 
-#endif
+    Contact    _contact[8];
+};
