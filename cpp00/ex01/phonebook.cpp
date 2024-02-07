@@ -1,9 +1,10 @@
 #include "PhoneBook.hpp"
+#include "Contact.hpp"
 
 PhoneBook::PhoneBook(void)
 {
-    this->count = 0;
-    this->full = 0;
+    this->_count = 0;
+    this->_full = 0;
     // std::cout << "PB Constructor called" << std::endl;
     return;
 }
@@ -11,6 +12,45 @@ PhoneBook::PhoneBook(void)
 PhoneBook::~PhoneBook(void)
 {
     // std::cout << "PB Destructor called" << std::endl;
+    return;
+}
+
+void    PhoneBook::add(void)
+{
+	std::string null;
+
+    std::cout << SET_TERM << std::endl;
+    std::cout << "What's the First Name?" << std::endl;
+    _contact[_count].setFirstName();
+    std::cout << SET_TERM << std::endl;
+
+    std::cout << "What's the Last Name?" << std::endl;
+    _contact[_count].setLastName();
+    std::cout << SET_TERM << std::endl;
+
+    std::cout << "What's the Nickname?" << std::endl;
+    _contact[_count].setNickname();
+    std::cout << SET_TERM << std::endl;
+
+    std::cout << "What's the Phone Number?" << std::endl;
+    _contact[_count].setPhoneNumber();
+    std::cout << SET_TERM << std::endl;
+
+    std::cout << "What's the Darkest Secret?" << std::endl;
+    _contact[_count].setDarkestSecret();
+    std::cout << SET_TERM << std::endl;
+
+    this->_count++;
+    if (this->_count > 7)
+    {
+        this->_count = 0;
+        this->_full = 1;
+    }
+
+    std::cout << "Contact successfully added" << std::endl << std::endl;
+	std::cout << "Enter any key followed by ENTER to continue..." << std::endl;
+	std::cin >> null;
+	std::cin.ignore();
     return;
 }
 
@@ -28,55 +68,16 @@ std::string truncate(std::string str)
     return (str2);
 }
 
-void    PhoneBook::add(void)
-{
-	std::string null;
-
-    std::cout << SET_TERM << std::endl;
-    std::cout << "What's the First Name?" << std::endl;
-    std::cin >> this->_contact[this->count].firstName;
-    std::cout << SET_TERM << std::endl;
-
-    std::cout << "What's the Last Name?" << std::endl;
-    std::cin >> this->_contact[this->count].lastName;
-    std::cout << SET_TERM << std::endl;
-
-    std::cout << "What's the Nickname?" << std::endl;
-    std::cin >> this->_contact[this->count].nickname;
-    std::cout << SET_TERM << std::endl;
-
-    std::cout << "What's the Phone Number?" << std::endl;
-    std::cin >> this->_contact[this->count].phoneNumber;
-    std::cout << SET_TERM << std::endl;
-
-    std::cout << "What's the Darkest Secret?" << std::endl;
-    std::cin >> this->_contact[this->count].darkestSecret;
-    std::cout << SET_TERM << std::endl;
-
-    this->count++;
-    if (this->count > 7)
-    {
-        this->count = 0;
-        this->full = 1;
-    }
-
-    std::cout << "Contact successfully added" << std::endl << std::endl;
-	std::cout << "Enter any key and ENTER to continue..." << std::endl;
-	std::cin >> null;
-	std::cin.ignore();
-    return;
-}
-
 void    PhoneBook::search(void)
 {
     int size;
     std::string command;
 
 
-    if (this->full == 1)
+    if (this->_full == 1)
         size = 8;
     else
-        size = count;
+        size = _count;
     std::cout <<
     std::setw(10) << "INDEX" << "|" <<
     std::setw(10) << "FIRST NAME" << "|" <<
@@ -85,11 +86,11 @@ void    PhoneBook::search(void)
     for (int i = 0; i < 7; i++)
     {
         std::cout << std::setw(10) << i + 1 << "|" <<
-        std::setw(10) << truncate(_contact[i].firstName) << "|" <<
-        std::setw(10) << truncate(_contact[i].lastName) << "|" <<
-        std::setw(10) << truncate(_contact[i].nickname) << std::endl;
+        std::setw(10) << truncate(_contact[i].getFirstName()) << "|" <<
+        std::setw(10) << truncate(_contact[i].getLastName()) << "|" <<
+        std::setw(10) << truncate(_contact[i].getNickname()) << std::endl;
     }
-    if (this->count == 0 && this->full == 0)
+    if (this->_count == 0 && this->_full == 0)
     {
         std::cout << std::endl;
         return;
@@ -104,14 +105,14 @@ void    PhoneBook::search(void)
 			std::cout << "\033[0J";
 			continue;
 		}
-		if (stoi(command) >= 1 && stoi(command) < 9 && (stoi(command) <= this->count || this->full == 1))
+		if (stoi(command) >= 1 && stoi(command) < 9 && (stoi(command) <= this->_count || this->_full == 1))
 		{
 			std::cout << std::endl << std::endl;
-			std::cout << "FIRST NAME:       " << _contact[stoi(command) - 1].firstName << std::endl;
-			std::cout << "LAST NAME:        " << _contact[stoi(command) - 1].lastName << std::endl;
-			std::cout << "NICKNAME:         " << _contact[stoi(command) - 1].nickname << std::endl;
-			std::cout << "PHONE NUMBER:     " << _contact[stoi(command) - 1].phoneNumber << std::endl;
-			std::cout << "DARKEST SECRET:   " << _contact[stoi(command) - 1].darkestSecret << std::endl;
+			std::cout << "FIRST NAME:       " << _contact[stoi(command) - 1].getFirstName() << std::endl;
+			std::cout << "LAST NAME:        " << _contact[stoi(command) - 1].getLastName() << std::endl;
+			std::cout << "NICKNAME:         " << _contact[stoi(command) - 1].getNickname() << std::endl;
+			std::cout << "PHONE NUMBER:     " << _contact[stoi(command) - 1].getPhoneNumber() << std::endl;
+			std::cout << "DARKEST SECRET:   " << _contact[stoi(command) - 1].getDarkestSecret() << std::endl;
 			std::cout << std::endl << std::endl;
 			std::cout << "Enter any key and ENTER to continue..." << std::endl;
 			std::cin >> command;
@@ -128,30 +129,4 @@ void    PhoneBook::exitProgram(void)
     std::cout << "EXITED" << std::endl;
     exit(0);
     return;
-}
-
-int main(void)
-{
-    PhoneBook   phoneBook;
-
-    std::string        command;
-    std::string str1 = "ADD";
-    std::string str2 = "SEARCH";
-    std::string str3 = "EXIT";
-
-    std::cout << SET_TERM << std::endl;
-    while (std::cin)
-    {
-        std::cout << "PhoneBook 1.0" << std::endl << std::endl;
-        std::cout << "Use the ADD, SEARCH or EXIT command" << std::endl;
-        std::cin >> command;
-        if (command.compare(str1) == 0)
-            phoneBook.add();
-        else if (command.compare(str2) == 0)
-            phoneBook.search();
-        else if (command.compare(str3) == 0)
-            break;
-        std::cout << SET_TERM << std::endl;
-    }
-    return (0);
 }

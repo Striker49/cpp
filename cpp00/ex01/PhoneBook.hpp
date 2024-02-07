@@ -7,11 +7,12 @@
 # define SET_TERM "\033[2J\033[H"
 
 class PhoneBook {
-    int count;
-    int full;
+    int _count;
+    int _full;
 public:
     PhoneBook(void);
     ~PhoneBook(void);
+
     void    add(void);
     void    search(void);
     void    exitProgram(void);
