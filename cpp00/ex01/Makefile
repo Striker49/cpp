@@ -4,7 +4,8 @@ CC = c++
 
 CFLAGS = -Werror -Wextra -Wall -std=c++98
 
-SRC = PhoneBook.cpp
+SRC = Contact.cpp \
+	PhoneBook.cpp
 
 OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))
 

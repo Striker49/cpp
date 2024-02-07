@@ -1,7 +1,5 @@
 #include "PhoneBook.hpp"
 
-
-
 PhoneBook::PhoneBook(void)
 {
     this->count = 0;
@@ -13,18 +11,6 @@ PhoneBook::PhoneBook(void)
 PhoneBook::~PhoneBook(void)
 {
     // std::cout << "PB Destructor called" << std::endl;
-    return;
-}
-
-Contact::Contact(void)
-{
-    // std::cout << "C Constructor called" << std::endl;
-    return;
-}
-
-Contact::~Contact(void)
-{
-    // std::cout << "C Destructor called" << std::endl;
     return;
 }
 
