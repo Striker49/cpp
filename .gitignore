@@ -1,5 +1,6 @@
 .DS_Store
 megaphone
-cpp00/ex00/megaphone
-cpp00/ex01/PhoneBook
-cpp00/ex02/BANKER
+phonebook
+banker
+*.o
+/obj

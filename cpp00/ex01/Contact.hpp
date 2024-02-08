@@ -1,8 +1,5 @@
 #pragma once
 #include <iostream>
-#include <string>
-#include <iomanip>
-#include <cctype>
 
 class   Contact {
 public:

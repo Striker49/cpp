@@ -1,5 +1,9 @@
 #include "PhoneBook.hpp"
-#include "Contact.hpp"
+#include <string>
+#include <iomanip>
+#include <limits>
+#include <ios>
+
 
 PhoneBook::PhoneBook(void)
 {
@@ -47,10 +51,9 @@ void    PhoneBook::add(void)
         this->_full = 1;
     }
 
-    std::cout << "Contact successfully added" << std::endl << std::endl;
-	std::cout << "Enter any key followed by ENTER to continue..." << std::endl;
-	std::cin >> null;
-	std::cin.ignore();
+    std::cout << "\033[1;32m" << "Contact successfully added" << "\033[0;37m" << std::endl << std::endl;
+	std::cout << "\033[0;31m" << "Press ENTER to continue..." << "\033[0;37m" << std::endl;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     return;
 }
 
@@ -78,15 +81,15 @@ void    PhoneBook::search(void)
         size = 8;
     else
         size = _count;
-    std::cout <<
-    std::setw(10) << "INDEX" << "|" <<
-    std::setw(10) << "FIRST NAME" << "|" <<
+    std::cout << std::endl << std::endl <<
+    std::setw(10) << std::right << "INDEX" << "|" <<
+    std::setw(10) << std::left << "FIRST NAME" << "|" <<
     std::setw(10) << "LAST NAME" << "|" <<
     std::setw(10) << "NICKNAME" << std::endl;
     for (int i = 0; i < 7; i++)
     {
-        std::cout << std::setw(10) << i + 1 << "|" <<
-        std::setw(10) << truncate(_contact[i].getFirstName()) << "|" <<
+        std::cout << std::right << std::setw(10) << i + 1 << "|" <<
+        std::setw(10) << std::left << truncate(_contact[i].getFirstName()) << "|" <<
         std::setw(10) << truncate(_contact[i].getLastName()) << "|" <<
         std::setw(10) << truncate(_contact[i].getNickname()) << std::endl;
     }
@@ -97,7 +100,7 @@ void    PhoneBook::search(void)
     }
     std::cout << std::endl << std::endl;
     std::cout << "Which contact would you like to display?" << std::endl;
-	while (std::cin)
+	while (!std::cin.eof())
 	{
 		std::cin >> command;
 		if (!isdigit(command[0]) || command.length() > 1)
@@ -108,15 +111,15 @@ void    PhoneBook::search(void)
 		if (stoi(command) >= 1 && stoi(command) < 9 && (stoi(command) <= this->_count || this->_full == 1))
 		{
 			std::cout << std::endl << std::endl;
-			std::cout << "FIRST NAME:       " << _contact[stoi(command) - 1].getFirstName() << std::endl;
-			std::cout << "LAST NAME:        " << _contact[stoi(command) - 1].getLastName() << std::endl;
-			std::cout << "NICKNAME:         " << _contact[stoi(command) - 1].getNickname() << std::endl;
-			std::cout << "PHONE NUMBER:     " << _contact[stoi(command) - 1].getPhoneNumber() << std::endl;
-			std::cout << "DARKEST SECRET:   " << _contact[stoi(command) - 1].getDarkestSecret() << std::endl;
+			std::cout << "\033[1;34m" << "FIRST NAME:       " << "\033[0;37m" << _contact[stoi(command) - 1].getFirstName() << std::endl << std::endl;
+			std::cout << "\033[1;34m" << "LAST NAME:        " << "\033[0;37m"  << _contact[stoi(command) - 1].getLastName() << std::endl << std::endl;
+			std::cout << "\033[1;34m" << "NICKNAME:         " << "\033[0;37m"  << _contact[stoi(command) - 1].getNickname() << std::endl << std::endl;
+			std::cout << "\033[1;34m" << "PHONE NUMBER:     " << "\033[0;37m"  << _contact[stoi(command) - 1].getPhoneNumber() << std::endl << std::endl;
+			std::cout << "\033[1;34m" << "DARKEST SECRET:   " << "\033[0;37m"  << _contact[stoi(command) - 1].getDarkestSecret() << std::endl;
 			std::cout << std::endl << std::endl;
-			std::cout << "Enter any key and ENTER to continue..." << std::endl;
-			std::cin >> command;
-			std::cin.ignore();
+			std::cout << "\033[0;31m" << "Press ENTER to continue..." << "\033[0;37m" << std::endl;
+			std::getline(std::cin, command);
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     		std::cout << SET_TERM << std::endl;
 			break;
 		}

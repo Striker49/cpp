@@ -1,9 +1,6 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <cctype>
 #include "Contact.hpp"
+#include <iostream>
 # define SET_TERM "\033[2J\033[H"
 
 class PhoneBook {

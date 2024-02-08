@@ -1,4 +1,4 @@
-NAME = PhoneBook
+NAME = phonebook
 
 CC = c++
 
@@ -14,7 +14,7 @@ OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))
 
 OBJ_DIR = obj
 
-$(OBJ_DIR)/%.o: %.cpp $(HEADERS) | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)

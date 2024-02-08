@@ -10,11 +10,11 @@ int main(void)
     std::string str3 = "EXIT";
 
     std::cout << SET_TERM << std::endl;
-    while (std::cin)
+    while (!std::cin.eof())
     {
         std::cout << "PhoneBook 1.0" << std::endl << std::endl;
         std::cout << "Use the ADD, SEARCH or EXIT command" << std::endl;
-        std::cin >> command;
+        std::getline(std::cin, command);
         if (command.compare(str1) == 0)
             phoneBook.add();
         else if (command.compare(str2) == 0)

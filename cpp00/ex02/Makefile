@@ -1,4 +1,4 @@
-NAME = BANKER
+NAME = banking
 
 CC = c++
 
