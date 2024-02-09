@@ -1,4 +1,4 @@
-NAME = Zombie
+NAME = zombieHorde
 
 CC = c++
 
@@ -7,9 +7,8 @@ CFLAGS = -Werror -Wextra -Wall -std=c++98
 HEADERS = Zombie.hpp
 
 SRC = main.cpp \
-	newZombie.cpp \
-	randomChump.cpp \
-	zombie.cpp
+	zombie.cpp \
+	zombieHorde.cpp
 
 OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))
 

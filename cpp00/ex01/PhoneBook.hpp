@@ -6,6 +6,7 @@
 class PhoneBook {
     int _count;
     int _full;
+    Contact    _contact[8];
 public:
     PhoneBook(void);
     ~PhoneBook(void);
@@ -14,5 +15,4 @@ public:
     void    search(void);
     void    exitProgram(void);
 
-    Contact    _contact[8];
 };

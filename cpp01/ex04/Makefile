@@ -1,21 +1,18 @@
-NAME = Zombie
+NAME = sed
 
 CC = c++
 
 CFLAGS = -Werror -Wextra -Wall -std=c++98
 
-HEADERS = Zombie.hpp
+HEADERS = HumanA.hpp HumanB.hpp Weapon.hpp
 
-SRC = main.cpp \
-	newZombie.cpp \
-	randomChump.cpp \
-	zombie.cpp
+SRC = main.cpp
 
 OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))
 
 OBJ_DIR = obj
 
-$(OBJ_DIR)/%.o: %.cpp $(HEADERS) | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)

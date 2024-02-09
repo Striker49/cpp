@@ -61,7 +61,7 @@ std::string truncate(std::string str)
 {
     std::string str2;
 
-    if (str.length() > 9)
+    if (str.length() > 10)
     {
         std::string str2 = str.substr(0, 9);
         std::cout << str2 + ".";
