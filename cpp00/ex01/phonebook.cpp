@@ -86,7 +86,7 @@ void    PhoneBook::search(void)
     std::setw(10) << std::left << "FIRST NAME" << "|" <<
     std::setw(10) << "LAST NAME" << "|" <<
     std::setw(10) << "NICKNAME" << std::endl;
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 8; i++)
     {
         std::cout << std::right << std::setw(10) << i + 1 << "|" <<
         std::setw(10) << std::left << truncate(_contact[i].getFirstName()) << "|" <<
