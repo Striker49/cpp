@@ -33,11 +33,14 @@ void    Harl::error( void )
 void    Harl::complain( std::string level)
 {
 	std::string Sarray[4] = {"debug", "info", "warning", "error"};
-	std::string Farray[4] = {Harl::&debug(), Harl::&info(), Harl::&warning(), Harl::&error()};
+	void (Harl::*Farray[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		if (level == Sarray[i])
-			Farray[i];
+		{
+			(this->*Farray[i])();
+			break;
+		}
 	}
 }

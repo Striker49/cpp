@@ -8,3 +8,5 @@ sed
 Harlequin's
 *.o
 /obj
+harl
+harlFilter

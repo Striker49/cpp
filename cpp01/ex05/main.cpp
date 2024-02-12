@@ -4,8 +4,10 @@
 
 int main(void)
 {
-    Harl        Bank;
-    std::string level;
+    Harl        Bob;
 
-    Bank.complain(level);
+    Bob.complain("debug");
+    Bob.complain("info");
+    Bob.complain("warning");
+    Bob.complain("error");
 }
