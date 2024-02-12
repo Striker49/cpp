@@ -50,6 +50,7 @@ void    Harl::complain( std::string level)
 		else
 			id = 4;
 	}
+	
 	switch (id)
 	{
 		case 0:
