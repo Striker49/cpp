@@ -2,14 +2,13 @@
 #include <string>
 #include "Harl.hpp"
 
-int main( void )
+int main( int argc, char **argv)
 {
     Harl        Bob;
 
-    Bob.complain("DEBUG");
-    Bob.complain("INFO");
-    Bob.complain("WARNING");
-    Bob.complain("ERROR");
-    Bob.complain("ELSE");
+    if (argc < 2 || argc > 2)
+        return(0);
 
+    Bob.complain(argv[1]);
+    return (0);
 }

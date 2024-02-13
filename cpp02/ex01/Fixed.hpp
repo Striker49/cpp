@@ -5,8 +5,8 @@
 class Fixed
 {
 private:
-    int integer;
-    static const int fract = 8;
+    int _integer;
+    static const int _fract = 8;
 public:
     Fixed(void);
     Fixed(int const& src);

@@ -1,9 +1,10 @@
 #include "Fixed.hpp"
+#include <cmath>
 
 Fixed::Fixed(void)
 {
     std::cout << "Default constructor called" << std::endl;
-    this->integer = 0;
+    this->_integer = 0;
 }
 
 Fixed::Fixed(Fixed const& src)
@@ -17,18 +18,14 @@ Fixed::Fixed(int const& src)
 {
     std::cout << "Int constructor called" << std::endl;
 
-    // *this = src;
-    this->integer = src;
-    this->integer = toInt();
+    this->_integer = src << _fract;
 }
 
 Fixed::Fixed(float const& src)
 {
     std::cout << "Float constructor called" << std::endl;
 
-    // *this = src;
-    this->integer = src;
-    this->integer = toFloat();
+    this->_integer = roundf(src * (1 << _fract));
 }
 
 Fixed& Fixed::operator=(Fixed const& rhs)
@@ -37,7 +34,7 @@ Fixed& Fixed::operator=(Fixed const& rhs)
 
     if (this != &rhs)
     {
-        this->integer = rhs.getRawBits();
+        this->_integer = rhs._integer;
     }
     return *this;
 }
@@ -52,28 +49,28 @@ int Fixed::getRawBits( void ) const
 {
     std::cout << "getRawBits function called" << std::endl;
 
-    return (this->integer);
+    return (this->_integer);
 }
 
 void Fixed::setRawBits( int const raw)
 {
     std::cout << "setRawBits function called" << std::endl;
 
-    this->integer = raw;
+    this->_integer = raw;
 }
 
 int Fixed::toInt( void ) const
 {
-    return (static_cast<int>(this->integer));
+    return (static_cast<int>(this->_integer) >> _fract);
 }
 
 float Fixed::toFloat( void ) const
 {
-    return (static_cast<float>(this->integer));
+    return (static_cast<float>(this->_integer) / (1 << _fract));
 }
 
 std::ostream & operator<<(std::ostream & o, Fixed const & rhs)
 {
-    o << rhs.getRawBits();
+    o << rhs.toFloat();
     return(o);
 }

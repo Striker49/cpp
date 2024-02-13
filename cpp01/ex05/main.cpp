@@ -10,4 +10,5 @@ int main(void)
     Bob.complain("info");
     Bob.complain("warning");
     Bob.complain("error");
+    Bob.complain("asdasd");
 }

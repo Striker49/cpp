@@ -21,20 +21,36 @@ std::string find_replace(std::string string, std::string s1, std::string s2)
 int main(int argc, char **argv)
 {
     std::string texte;
+    std::string inFile = argv[1];
     std::string newFile = argv[1];
+    // std::fstream fileStream;
+    std::fstream ifs(inFile);
 
-    std::cout << newFile;
+    ifs.open(inFile);
+    if (ifs.fail())
+    {
+        std::cout << "Bad file..!" << std::endl;
+        return (1);
+    }
+    if (ifs.peek() == std::ifstream::traits_type::eof())
+    {
+        std::cout << "File is empty..!" << std::endl;
+        return (1);
+    }
     newFile = newFile.append(".replace");
 
     (void)argv;
     if (argc < 3 || argc > 4)
         return (0);
 
-    std::fstream ifs("text.txt");
     std::ofstream ofs(newFile);
 
     while(std::getline(ifs, texte))
-        ofs << find_replace(texte, argv[2], argv[3]) << std::endl;
+    {
+        ofs << find_replace(texte, argv[2], argv[3]);
+        if (ifs.peek() != std::ifstream::traits_type::eof())
+            ofs << std::endl;
+    }
     ifs.close();
     return (0);
 }

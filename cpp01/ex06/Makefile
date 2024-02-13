@@ -2,7 +2,7 @@ NAME = harlFilter
 
 CC = c++
 
-CFLAGS = -Werror -Wextra -Wall -std=c++98
+CFLAGS = -Werror -Wextra -Wall -std=c++98 -fsanitize=address
 
 HEADERS = Harl.hpp
 

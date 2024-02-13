@@ -40,25 +40,50 @@ std::string Contact::getDarkestSecret(void)
 
 void Contact::setFirstName(void)
 {
-    std::getline(std::cin, this->_firstName);
+    while (!std::cin.eof())
+    {
+        std::getline(std::cin, this->_firstName);
+        if (this->_firstName.size() != 0)
+            break;
+    }
 }
 
 void Contact::setLastName(void)
 {
-    std::getline(std::cin, this->_lastName);
+    while (!std::cin.eof())
+    {
+        std::getline(std::cin, this->_lastName);
+        if (this->_lastName.size() != 0)
+            break;
+    }
 }
 
 void Contact::setNickname(void)
 {
-    std::getline(std::cin, this->_nickname);
+    while (!std::cin.eof())
+    {
+        std::getline(std::cin, this->_nickname);
+        if (this->_nickname.size() != 0)
+            break;
+    }
 }
 
 void Contact::setPhoneNumber(void)
 {
-    std::getline(std::cin, this->_phoneNumber);
+    while (!std::cin.eof())
+    {
+        std::getline(std::cin, this->_phoneNumber);
+        if (this->_phoneNumber.size() != 0)
+            break;
+    }
 }
 
 void Contact::setDarkestSecret(void)
 {
-    std::getline(std::cin, this->_darkestSecret);
+    while (!std::cin.eof())
+    {
+        std::getline(std::cin, this->_darkestSecret);
+        if (this->_darkestSecret.size() != 0)
+            break;
+    }
 }
