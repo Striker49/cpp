@@ -15,10 +15,11 @@ public:
     ~Fixed(void);
 
     Fixed& operator=(Fixed const& rhs);
-    Fixed& operator<(Fixed const& rhs);
-    Fixed& operator<=(Fixed const& rhs);
-    Fixed& operator>(Fixed const& rhs);
-    Fixed& operator>=(Fixed const& rhs);
+    bool operator<(Fixed const& rhs);
+    bool operator==(Fixed const& rhs);
+    bool operator<=(Fixed const& rhs);
+    bool operator>(Fixed const& rhs);
+    bool operator>=(Fixed const& rhs);
 
     Fixed& operator*(Fixed const& rhs);
     Fixed& operator/(Fixed const& rhs);
@@ -28,6 +29,11 @@ public:
     Fixed operator--( int );
     Fixed& operator++( void );
     Fixed& operator--( void );
+
+    static const Fixed& min(Fixed const& rhs, Fixed const& rhs2);
+    static Fixed& min(Fixed& rhs, Fixed& rhs3);
+    static const Fixed& max(Fixed const& rhs, Fixed const& rhs2);
+    static Fixed& max(Fixed& rhs, Fixed& rhs3);
 
     int getRawBits( void ) const;
     void setRawBits( int const raw);
