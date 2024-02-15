@@ -21,11 +21,15 @@ std::string find_replace(std::string string, std::string s1, std::string s2)
 int main(int argc, char **argv)
 {
     std::string texte;
-    std::string inFile = argv[1];
-    std::string newFile = argv[1];
-    // std::fstream fileStream;
+    std::string inFile;
+    std::string newFile;
     std::fstream ifs(inFile);
 
+    if (argc < 3 || argc > 4)
+        return (0);
+
+    inFile = argv[1];
+    newFile = inFile;
     ifs.open(inFile);
     if (ifs.fail())
     {
@@ -39,9 +43,6 @@ int main(int argc, char **argv)
     }
     newFile = newFile.append(".replace");
 
-    (void)argv;
-    if (argc < 3 || argc > 4)
-        return (0);
 
     std::ofstream ofs(newFile);
 

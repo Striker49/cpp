@@ -2,12 +2,11 @@
 
 int main(void)
 {
-    Zombie Bob;
     Zombie* Nathan;
 
-    Bob.randomChump("Bob");
-    Bob.randomChump("Bob");
-    Bob.randomChump("Bob");
+    randomChump("Bob");
+    randomChump("Bob2");
+    randomChump("Bob3");
     Nathan = newZombie("Nathan");
 
     delete Nathan;

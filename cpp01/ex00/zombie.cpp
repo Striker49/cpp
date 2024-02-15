@@ -2,7 +2,7 @@
 
 Zombie::Zombie( void )
 {
-
+    std::cout << this->_name << "A Zombie has been created" << std::endl;
 }
 
 Zombie::~Zombie( void )
