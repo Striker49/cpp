@@ -3,7 +3,7 @@
 Fixed::Fixed(void)
 {
     std::cout << "Default constructor called" << std::endl;
-    this->integer = 0;
+    this->_integer = 0;
 }
 
 Fixed::Fixed(Fixed const& src)
@@ -19,7 +19,7 @@ Fixed& Fixed::operator=(Fixed const& rhs)
 
     if (this != &rhs)
     {
-        this->integer = rhs.getRawBits();
+        this->_integer = rhs.getRawBits();
     }
     return *this;
 }
@@ -33,12 +33,12 @@ int Fixed::getRawBits( void ) const
 {
     std::cout << "getRawBits function called" << std::endl;
 
-    return (this->integer);
+    return (this->_integer);
 }
 
 void Fixed::setRawBits( int const raw)
 {
     std::cout << "setRawBits function called" << std::endl;
 
-    this->integer = raw;
+    this->_integer = raw;
 }

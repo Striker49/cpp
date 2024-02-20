@@ -17,14 +17,15 @@ public:
     Fixed& operator=(Fixed const& rhs);
     bool operator<(Fixed const& rhs);
     bool operator==(Fixed const& rhs);
+    bool operator!=(Fixed const& rhs);
     bool operator<=(Fixed const& rhs);
     bool operator>(Fixed const& rhs);
     bool operator>=(Fixed const& rhs);
 
-    Fixed& operator*(Fixed const& rhs);
-    Fixed& operator/(Fixed const& rhs);
-    Fixed& operator+(Fixed const& rhs);
-    Fixed& operator-(Fixed const& rhs);
+    Fixed operator*(Fixed const& rhs);
+    Fixed operator/(Fixed const& rhs);
+    Fixed operator+(Fixed const& rhs);
+    Fixed operator-(Fixed const& rhs);
     Fixed operator++( int );
     Fixed operator--( int );
     Fixed& operator++( void );

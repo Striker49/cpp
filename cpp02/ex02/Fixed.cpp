@@ -30,7 +30,7 @@ Fixed::Fixed(float const& src)
 
 Fixed& Fixed::operator=(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator "=" called" << std::endl;
 
     if (this != &rhs)
     {
@@ -41,88 +41,83 @@ Fixed& Fixed::operator=(Fixed const& rhs)
 
 bool Fixed::operator<(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator "<" called" << std::endl;
 
     return (this->_integer < rhs._integer);
 }
 
 bool Fixed::operator==(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
 
     return (this->_integer == rhs._integer);
 }
 
+bool Fixed::operator!=(Fixed const& rhs)
+{
+    // std::cout << "Overload operator operator called" << std::endl;
+
+    return (this->_integer != rhs._integer);
+}
+
 bool Fixed::operator<=(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
 
     return (this->_integer <= rhs._integer);
 }
 
 bool Fixed::operator>(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
 
     return (this->_integer > rhs._integer);
 }
 
 bool Fixed::operator>=(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
 
     return (this->_integer >= rhs._integer);
 }
 
-Fixed& Fixed::operator*(Fixed const& rhs)
+Fixed Fixed::operator*(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
-    // std::cout << "this value: " << this->_integer << std::endl;
-    // std::cout << "rhs value: " << rhs._integer << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
+    Fixed product;
+    product._integer = roundf((this->toFloat() * rhs.toFloat()) * (1 << this->_fract));
 
-    this->_integer *= rhs._integer;
-    // std::cout << "this value: " << this->_integer << std::endl;
-    // std::cout << "*this value: " << *this << std::endl;
-
-    return (*this);
+    return (product);
 }
 
-Fixed& Fixed::operator/(Fixed const& rhs)
+Fixed Fixed::operator/(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
+    Fixed quotient;
+    quotient._integer = roundf((this->toFloat() / rhs.toFloat()) * (1 << this->_fract));
 
-    if (this != &rhs)
-    {
-        this->_integer /= rhs._integer;
-    }
-    return (*this);
+    return (quotient);
 }
 
-Fixed& Fixed::operator+(Fixed const& rhs)
+Fixed Fixed::operator+(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
-
-    if (this != &rhs)
-    {
-        this->_integer += rhs._integer;
-    }
-    return (*this);
+    // std::cout << "Overload operator operator called" << std::endl;
+    Fixed res;
+    res._integer = this->_integer + rhs._integer;
+    return (res);
 }
 
-Fixed& Fixed::operator-(Fixed const& rhs)
+Fixed Fixed::operator-(Fixed const& rhs)
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
-
-    if (this != &rhs)
-    {
-        this->_integer -= rhs._integer;
-    }
-    return (*this);
+    // std::cout << "Overload operator operator called" << std::endl;
+    Fixed res;
+    res._integer = this->_integer - rhs._integer;
+    return (res);
 }
 
 Fixed Fixed::operator++( int )
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
     Fixed temp = *this;
 
     ++this->_integer;
@@ -131,24 +126,24 @@ Fixed Fixed::operator++( int )
 
 Fixed Fixed::operator--( int )
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
     Fixed temp;
 
     --this->_integer;
     return (temp);
 }
 
-Fixed& Fixed::operator++()
+Fixed& Fixed::operator++( void )
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
 
     this->_integer++;
     return (*this);
 }
 
-Fixed& Fixed::operator--()
+Fixed& Fixed::operator--( void )
 {
-    // std::cout << "Copy assignment operator called" << std::endl;
+    // std::cout << "Overload operator operator called" << std::endl;
 
     this->_integer--;
     return (*this);

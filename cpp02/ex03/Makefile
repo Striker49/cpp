@@ -6,7 +6,8 @@ CFLAGS = -Werror -Wextra -Wall -std=c++98
 
 SRC = Fixed.cpp \
 	main.cpp \
-	Point.cpp
+	Point.cpp \
+	bsp.cpp
 
 OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))
 

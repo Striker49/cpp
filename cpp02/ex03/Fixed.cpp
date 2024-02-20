@@ -77,18 +77,19 @@ bool Fixed::operator>=(Fixed const& rhs)
 Fixed Fixed::operator*(Fixed const& rhs)
 {
     // std::cout << "Overload operator operator called" << std::endl;
-    Fixed res;
-    res._integer = this->_integer * rhs._integer >> _fract;
+    Fixed product;
+    product._integer = roundf((this->toFloat() * rhs.toFloat()) * (1 << this->_fract));
 
-    return (res);
+    return (product);
 }
 
 Fixed Fixed::operator/(Fixed const& rhs)
 {
     // std::cout << "Overload operator operator called" << std::endl;
-    Fixed res;
-    res._integer = this->_integer / rhs._integer >> _fract;
-    return (res);
+    Fixed quotient;
+    quotient._integer = roundf((this->toFloat() / rhs.toFloat()) * (1 << this->_fract));
+
+    return (quotient);
 }
 
 Fixed Fixed::operator+(Fixed const& rhs)
