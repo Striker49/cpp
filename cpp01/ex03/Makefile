@@ -4,8 +4,6 @@ CC = c++
 
 CFLAGS = -Werror -Wextra -Wall -std=c++98
 
-HEADERS = HumanA.hpp HumanB.hpp main.hpp Weapon.hpp
-
 SRC = HumanA.cpp \
 	HumanB.cpp \
 	main.cpp \

@@ -13,5 +13,5 @@ class HumanA
     HumanA( std::string name, Weapon& _weapon);
     ~HumanA( void );
     void attack( void );
-    void setWeapon( Weapon weapon);
+    void setWeapon( Weapon &weapon);
 };

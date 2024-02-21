@@ -39,42 +39,42 @@ Fixed& Fixed::operator=(Fixed const& rhs)
     return (*this);
 }
 
-bool Fixed::operator<(Fixed const& rhs)
+bool Fixed::operator<(Fixed const& rhs) const
 {
     // std::cout << "Overload operator "<" called" << std::endl;
 
     return (this->_integer < rhs._integer);
 }
 
-bool Fixed::operator==(Fixed const& rhs)
+bool Fixed::operator==(Fixed const& rhs) const
 {
     // std::cout << "Overload operator operator called" << std::endl;
 
     return (this->_integer == rhs._integer);
 }
 
-bool Fixed::operator!=(Fixed const& rhs)
+bool Fixed::operator!=(Fixed const& rhs) const
 {
     // std::cout << "Overload operator operator called" << std::endl;
 
     return (this->_integer != rhs._integer);
 }
 
-bool Fixed::operator<=(Fixed const& rhs)
+bool Fixed::operator<=(Fixed const& rhs) const
 {
     // std::cout << "Overload operator operator called" << std::endl;
 
     return (this->_integer <= rhs._integer);
 }
 
-bool Fixed::operator>(Fixed const& rhs)
+bool Fixed::operator>(Fixed const& rhs) const
 {
     // std::cout << "Overload operator operator called" << std::endl;
 
     return (this->_integer > rhs._integer);
 }
 
-bool Fixed::operator>=(Fixed const& rhs)
+bool Fixed::operator>=(Fixed const& rhs) const
 {
     // std::cout << "Overload operator operator called" << std::endl;
 
@@ -194,12 +194,12 @@ const Fixed& Fixed::min(Fixed const& rhs, Fixed const& rhs2)
         return (rhs2);
 }
 
-Fixed& Fixed::min(Fixed& rhs, Fixed& rhs3)
+Fixed& Fixed::min(Fixed& rhs, Fixed& rhs2)
 {
-    if (rhs.getRawBits() < rhs3.getRawBits())
+    if (rhs.getRawBits() < rhs2.getRawBits())
         return (rhs);
     else
-        return (rhs3);
+        return (rhs2);
 }
 
 const Fixed& Fixed::max(Fixed const& rhs, Fixed const& rhs2)
@@ -210,10 +210,10 @@ const Fixed& Fixed::max(Fixed const& rhs, Fixed const& rhs2)
         return (rhs);
 }
 
-Fixed& Fixed::max(Fixed& rhs, Fixed& rhs3)
+Fixed& Fixed::max(Fixed& rhs, Fixed& rhs2)
 {
-    if (rhs.getRawBits() < rhs3.getRawBits())
-        return (rhs3);
+    if (rhs.getRawBits() < rhs2.getRawBits())
+        return (rhs2);
     else
         return (rhs);
 }

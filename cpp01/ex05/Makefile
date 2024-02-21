@@ -4,8 +4,6 @@ CC = c++
 
 CFLAGS = -Werror -Wextra -Wall -std=c++98
 
-HEADERS = Harl.hpp
-
 SRC = main.cpp Harl.cpp
 
 OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))

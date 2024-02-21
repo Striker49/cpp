@@ -4,8 +4,6 @@ CC = c++
 
 CFLAGS = -Werror -Wextra -Wall -std=c++98
 
-HEADERS = HumanA.hpp HumanB.hpp Weapon.hpp
-
 SRC = main.cpp
 
 OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))

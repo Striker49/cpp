@@ -27,7 +27,8 @@ int main(int argc, char **argv)
 
     if (argc < 3 || argc > 4)
         return (0);
-
+    if (argv[2][0] == '\0')
+        return (0);
     inFile = argv[1];
     newFile = inFile;
     ifs.open(inFile);
