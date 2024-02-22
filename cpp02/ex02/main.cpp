@@ -34,7 +34,6 @@ int main( void ) {
 
 	std::cout << std::endl;
 	std::cout << c << std::endl;
-	std::cout << resultat << std::endl;
 	std::cout << Fixed::min( a, b ) << std::endl;
 	std::cout << Fixed::max( c, b ) << std::endl;
 }
