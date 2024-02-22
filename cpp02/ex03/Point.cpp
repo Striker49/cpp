@@ -17,10 +17,15 @@ Point::Point(Point const& src) : _x(src._x), _y(src._y)
 	*this = src;
 }
 
-Point const& Point::operator=(Point const& rhs)
+Point& Point::operator=(Point const& rhs)
 {
     // std::cout << "Copy assignment operator called" << std::endl;
-	return (rhs);
+	if (this != &rhs)
+	{
+		Fixed(this->_x) = rhs._x;
+		Fixed(this->_y) = rhs._y;
+	}
+	return (*this);
 }
 
 Point::~Point(void)

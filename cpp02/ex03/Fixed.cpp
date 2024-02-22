@@ -127,7 +127,7 @@ Fixed Fixed::operator++( int )
 Fixed Fixed::operator--( int )
 {
     // std::cout << "Overload operator operator called" << std::endl;
-    Fixed temp;
+    Fixed temp = *this;
 
     --this->_integer;
     return (temp);

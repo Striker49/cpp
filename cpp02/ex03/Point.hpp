@@ -12,7 +12,7 @@ public:
 	Point(Point const& src);
 	Point(float const x, float const y);
 	~Point(void);
-	Point const& operator=(Point const& rhs);
+	Point& operator=(Point const& rhs);
 	Fixed const& getx(void) const;
 	Fixed const& gety(void) const;
 };
