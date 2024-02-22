@@ -1,0 +1,1 @@
+How to make FragTrap lose hp or be repaired instead of ClapTrap with a ClapTrap member function?
