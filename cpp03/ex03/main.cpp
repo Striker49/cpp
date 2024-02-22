@@ -5,18 +5,20 @@
 
 int	main( void )
 {
-	DiamondTrap Francoma("Francoma");
-	DiamondTrap Eboyce("Eboyce");
+	DiamondTrap Francoma("Francoma the SmartyPants");
+	DiamondTrap Eboyce("Eboyce the Edgelord");
 
+	Francoma.whoAmI();
+	Eboyce.whoAmI();
 	for(int i = 0; i < 5; i++)
 	{
-		Francoma.attack("Eboyce");
+		Francoma.attack("Eboyce the Edgelord");
 		Eboyce.takeDamage(30);
 	}
 	Francoma.highFivesGuys();
-	Eboyce.attack("Francoma");
-	Francoma.takeDamage(30);
-	Eboyce.beRepaired(5);
-	Francoma.beRepaired(5);
+	// Eboyce.attack("Francoma the SmartyPants");
+	// Francoma.DiamondTrap::takeDamage(30);
+	Eboyce.beRepaired(10);
+	Francoma.beRepaired(10);
 	return (0);
 }

@@ -1,5 +1,10 @@
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap( void ) : _name(""), _hp(10), _ep(10), _ad(0)
+{
+	std::cout << "ClapTrap " << this->_name << " has been created" << std::endl;
+}
+
 ClapTrap::ClapTrap( std::string name ) : _name(name), _hp(10), _ep(10), _ad(0)
 {
 	std::cout << "ClapTrap " << name << " has been created" << std::endl;
@@ -10,9 +15,16 @@ ClapTrap::ClapTrap(ClapTrap const& src) : _hp(10), _ep(10), _ad(0)
 	*this = src;
 }
 
-ClapTrap const& ClapTrap::operator=(ClapTrap const& rhs)
+ClapTrap& ClapTrap::operator=(ClapTrap const& rhs)
 {
-	return(rhs);
+	if (this != &rhs)
+	{
+		this->_name = rhs._name;
+		this->_hp = rhs._hp;
+		this->_ep = rhs._ep;
+		this->_ad = rhs._ad;
+	}
+	return(*this);
 }
 
 ClapTrap::~ClapTrap( void )

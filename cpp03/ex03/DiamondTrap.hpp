@@ -8,13 +8,14 @@ class DiamondTrap : public ScavTrap, public FragTrap
 	private:
 		std::string _name;
 	public:
-		DiamondTrap( std::string name );
+		DiamondTrap( void );
+		DiamondTrap( std::string const& name );
 		~DiamondTrap( void );
-		DiamondTrap( DiamondTrap const& src);
+		DiamondTrap( DiamondTrap const& src );
 
-		DiamondTrap const& operator=(DiamondTrap const& rhs);
+		DiamondTrap& operator=( DiamondTrap const& rhs );
 
-		using FragTrap::attack;
+		using ScavTrap::attack;
 
 		void	whoAmI( void );
 };

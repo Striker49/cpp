@@ -1,5 +1,10 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap( void) : ClapTrap("", 100, 50, 20), _name("")
+{
+	std::cout << "ScavTrap " << this->_name << " has been created" << std::endl;
+}
+
 ScavTrap::ScavTrap( std::string name ) : ClapTrap(name, 100, 50, 20), _name(name)
 {
 	std::cout << "ScavTrap " << name << " has been created" << std::endl;
@@ -15,9 +20,16 @@ ScavTrap::ScavTrap( ScavTrap const& src) : ClapTrap(src._name)
 	*this = src;
 }
 
-ScavTrap const& ScavTrap::operator=( ScavTrap const& rhs)
+ScavTrap& ScavTrap::operator=(ScavTrap const& rhs)
 {
-	return (rhs);
+	if (this != &rhs)
+	{
+		this->_name = rhs._name;
+		this->_hp = rhs._hp;
+		this->_ep = rhs._ep;
+		this->_ad = rhs._ad;
+	}
+	return(*this);
 }
 
 void ScavTrap::guardGate( void )

@@ -1,5 +1,10 @@
 #include "FragTrap.hpp"
 
+FragTrap::FragTrap( void ) : ClapTrap("", 100, 100, 30), _name("")
+{
+	std::cout << "FragTrap " << this->_name << " has been created" << std::endl;
+}
+
 FragTrap::FragTrap( std::string name ) : ClapTrap(name, 100, 100, 30), _name(name)
 {
 	std::cout << "FragTrap " << name << " has been created" << std::endl;
@@ -15,9 +20,16 @@ FragTrap::FragTrap( FragTrap const& src) : ClapTrap(src._name, 100, 100, 30), _n
 	*this = src;
 }
 
-FragTrap const& FragTrap::operator=( FragTrap const& rhs )
+FragTrap& FragTrap::operator=(FragTrap const& rhs)
 {
-	return (rhs);
+	if (this != &rhs)
+	{
+		this->_name = rhs._name;
+		this->_hp = rhs._hp;
+		this->_ep = rhs._ep;
+		this->_ad = rhs._ad;
+	}
+	return(*this);
 }
 
 

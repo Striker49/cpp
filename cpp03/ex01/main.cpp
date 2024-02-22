@@ -6,7 +6,7 @@ int	main( void )
 	ScavTrap Francoma("Francoma");
 	ScavTrap Eboyce("Eboyce");
 
-	for(int i = 0; i < 4; i++)
+	for(int i = 0; i < 5; i++)
 	{
 		Francoma.attack("Eboyce");
 		Eboyce.takeDamage(20);

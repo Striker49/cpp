@@ -10,13 +10,14 @@ class ClapTrap
 		int _ep;
 		int _ad;
 	public:
-		ClapTrap(std::string name);
-		ClapTrap(ClapTrap const& src);
-		~ClapTrap(void);
+		ClapTrap( void );
+		ClapTrap( std::string name );
+		ClapTrap( ClapTrap const& src );
+		~ClapTrap( void );
 
-		ClapTrap const&	operator=(ClapTrap const& rhs);
+		ClapTrap&	operator=(ClapTrap const& rhs );
 
-		void	attack(const std::string& target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
+		void	attack( const std::string& target);
+		void	takeDamage( unsigned int amount );
+		void	beRepaired( unsigned int amount );
 };
