@@ -1,2 +1,0 @@
-diamondtrap has 2 params name and clap name
-all classes share 

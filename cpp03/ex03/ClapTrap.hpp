@@ -5,11 +5,11 @@
 class ClapTrap
 {
 	protected:
-	ClapTrap(std::string name, int hp, int ep, int ad);
+	ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad);
 		std::string _name;
-		int _hp;
-		int _ep;
-		int _ad;
+		unsigned int _hp;
+		unsigned int _ep;
+		unsigned int _ad;
 	public:
 		ClapTrap( void );
 		ClapTrap( std::string name );

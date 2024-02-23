@@ -2,6 +2,7 @@
 
 DiamondTrap::DiamondTrap( void ) :  ClapTrap("", 100, 50, 30), ScavTrap(), FragTrap(), _name("")
 {
+	this->_hp = FragTrap::_hp;
 	std::cout << "DiamondTrap, " << this->_name << " a legendary being, has acended" << std::endl;
 }
 
@@ -34,6 +35,6 @@ DiamondTrap& DiamondTrap::operator=(DiamondTrap const& rhs)
 
 void	DiamondTrap::whoAmI( void )
 {
-	std::cout << "My name is " << this->_name << std::endl;
-	std::cout << "My ClapTrap name is " << this->ClapTrap::_name << std::endl;
+	std::cout << "\033[1;29m" << "My name is " << this->_name << "\033[1;37m" << std::endl;
+	std::cout << "\033[1;29m" << "My ClapTrap name is " << this->ClapTrap::_name << "\033[1;37m" << std::endl;
 }
