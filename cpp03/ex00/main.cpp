@@ -5,7 +5,7 @@ int	main( void )
 	ClapTrap Francoma("Francoma");
 	ClapTrap Eboyce("Eboyce");
 
-	for(int i = 0; i < 9; i++)
+	for(int i = 0; i < 10; i++)
 	{
 		Francoma.attack("Eboyce");
 		Eboyce.takeDamage(0);

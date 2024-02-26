@@ -35,6 +35,16 @@ DiamondTrap& DiamondTrap::operator=(DiamondTrap const& rhs)
 
 void	DiamondTrap::whoAmI( void )
 {
-	std::cout << "\033[1;29m" << "My name is " << this->_name << "\033[1;37m" << std::endl;
-	std::cout << "\033[1;29m" << "My ClapTrap name is " << this->ClapTrap::_name << "\033[1;37m" << std::endl;
+	if (this->_hp <= 0)
+	{
+		std::cout << "\033[0;30mDiamondTrap " << this->_name << " is unable to use this ability because it has been destroyed..!\033[0;37m" << std::endl;
+	}
+	else if(this->_ep <= 0)
+		std::cout << "\033[0;30mDiamondTrap " << this->_name << " can't use this ability because it doesn't have enough Energy Points left..!\033[0;37m" << std::endl;
+	else
+	{
+		this->_ep--;
+		std::cout << "\033[1;29m" << "My name is " << this->_name << "\033[1;37m" << std::endl;
+		std::cout << "\033[1;29m" << "My ClapTrap name is " << this->ClapTrap::_name << "\033[1;37m" << std::endl;
+	}
 }

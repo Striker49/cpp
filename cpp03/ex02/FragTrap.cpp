@@ -35,7 +35,17 @@ FragTrap& FragTrap::operator=(FragTrap const& rhs)
 
 void FragTrap::highFivesGuys( void )
 {
-	std::cout << "\033[1;37mFragTrap " << this->_name << " wants to high five you!!\033[0;37m" << std::endl;
+	if (this->_hp <= 0)
+	{
+		std::cout << "\033[0;30mFragTrap " << this->_name << " is unable to use this ability because it has been destroyed..!\033[0;37m" << std::endl;
+	}
+	else if(this->_ep <= 0)
+		std::cout << "\033[0;30mFragTrap " << this->_name << " can't use this ability because it doesn't have enough Energy Points left..!\033[0;37m" << std::endl;
+	else
+	{
+		this->_ep--;
+		std::cout << "\033[1;37mFragTrap " << this->_name << " wants to high five you!!\033[0;37m" << std::endl;
+	}
 }
 
 void FragTrap::attack( const std::string& target)

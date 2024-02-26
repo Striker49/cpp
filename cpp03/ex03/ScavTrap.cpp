@@ -34,7 +34,17 @@ ScavTrap& ScavTrap::operator=(ScavTrap const& rhs)
 
 void ScavTrap::guardGate( void )
 {
-	std::cout << "\033[1;37mScavTrap " << this->_name << " is now in Gate keeper mode!!\033[0;37m" << std::endl;
+	if (this->_hp <= 0)
+	{
+		std::cout << "\033[0;30mScavTrap " << this->_name << " is unable to use this ability because it has been destroyed..!\033[0;37m" << std::endl;
+	}
+	else if(this->_ep <= 0)
+		std::cout << "\033[0;30mScavTrap " << this->_name << " can't use this ability because it doesn't have enough Energy Points left..!\033[0;37m" << std::endl;
+	else
+	{
+		this->_ep--;
+		std::cout << "\033[1;37mScavTrap " << this->_name << " is now in Gate keeper mode!!\033[0;37m" << std::endl;
+	}
 }
 
 void ScavTrap::attack( const std::string& target)
