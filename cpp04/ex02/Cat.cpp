@@ -15,7 +15,10 @@ Cat::~Cat( void )
 
 Cat::Cat( Cat const& src )
 {
-	*this = src;
+	Cat* temp = new Cat;
+	temp = new Cat;
+	temp->_type = src._type;
+	*this = *temp;
 }
 
 Cat& Cat::operator=( Cat const& rhs )

@@ -15,7 +15,10 @@ Dog::~Dog( void )
 
 Dog::Dog( Dog const& src )
 {
-	*this = src;
+	Dog* temp = new Dog;
+	temp = new Dog;
+	temp->_type = src._type;
+	*this = *temp;
 }
 
 Dog& Dog::operator=( Dog const& rhs )

@@ -1,0 +1,1 @@
+IChar Deep copy?
