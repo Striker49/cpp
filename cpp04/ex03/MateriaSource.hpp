@@ -5,7 +5,7 @@
 class MateriaSource : public IMateriaSource
 {
 	protected:
-		AMateria _materia[3];
+		AMateria* _materia[4];
 	public:
 		MateriaSource(void);
 		MateriaSource(MateriaSource const& src);

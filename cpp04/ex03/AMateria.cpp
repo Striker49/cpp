@@ -3,6 +3,13 @@
 
 AMateria::AMateria(void)
 {
+	std::cout << "AMateria has been created" << std::endl;
+}
+
+AMateria::AMateria(std::string const & type) : _type(type)
+{
+	std::cout << this->_type << " AMateria has been created" << std::endl;
+
 }
 
 AMateria::AMateria(AMateria const& src)
@@ -23,13 +30,6 @@ std::string const & AMateria::getType() const
 	return(this->_type);
 }
 
-// AMateria* AMateria::clone() const
-// {
-// 	AMateria* tmp = new AMateria;
-// 	return (*tmp);
-
-// }
-
 void AMateria::use(ICharacter& target)
 {
 	(void)target;
@@ -38,4 +38,5 @@ void AMateria::use(ICharacter& target)
 
 AMateria::~AMateria(void)
 {
+	std::cout << this->_type << " AMateria has been destroyed" << std::endl;
 }

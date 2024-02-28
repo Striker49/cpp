@@ -1,1 +1,2 @@
 IChar Deep copy?
+Character uses AMateria::use???
