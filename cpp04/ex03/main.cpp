@@ -40,7 +40,7 @@ int main()
 	tmp = src->createMateria("ice");
 	me->equip(tmp);
 	tmp = src->createMateria("cure");
-	// me->unequip(4);
+	me->unequip(4);
 	me->unequip(1);
 	me->equip(tmp);
 	me->equip(tmp);

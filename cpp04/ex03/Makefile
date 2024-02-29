@@ -2,7 +2,7 @@ NAME = Materia
 
 CC = c++
 
-CFLAGS = -Werror -Wextra -Wall -std=c++98 -Wshadow -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -std=c++98 -Wshadow #-fsanitize=address
 
 SRC = AMateria.cpp \
 	Character.cpp \

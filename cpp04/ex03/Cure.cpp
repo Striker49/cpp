@@ -1,9 +1,7 @@
 #include "Cure.hpp"
-#include "Character.hpp"
 
 Cure::Cure(void) : AMateria("cure")
 {
-	Character::putInTrash(this);
 	std::cout << "Cure ability has been created" << std::endl;
 }
 
@@ -25,7 +23,6 @@ AMateria* Cure::clone() const
 {
 	Cure* tmp = new Cure;
 	tmp->_type = this->_type;
-	Character::putInTrash(tmp);
 	return (tmp);
 }
 

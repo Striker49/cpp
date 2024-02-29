@@ -1,5 +1,4 @@
 #include "MateriaSource.hpp"
-#include "Character.hpp"
 #include "Ice.hpp"
 
 MateriaSource::MateriaSource(void)
@@ -34,7 +33,7 @@ void MateriaSource::learnMateria(AMateria* src)
 			return;
 		}
 	}
-	// delete src;
+	delete src;
 	std::cout << "Cannot learn more materia..!" << std::endl;
 }
 
@@ -45,7 +44,16 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 		if (this->_materia[i] && this->_materia[i]->getType() == type)
 		{
 			AMateria* tmp = this->_materia[i]->clone();
-			Character::putInTrash(tmp);
+			// for (int j = 0; j < 100; j++)
+			// {
+			// 	if (this->_trash[j] == tmp)
+			// 		break;
+			// 	else if (this->_trash[j] == NULL)
+			// 	{
+			// 		this->_trash[j] = tmp;
+			// 		break;
+			// 	}
+			// }
 			return (tmp);
 		}
 	}
@@ -55,10 +63,10 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 
 MateriaSource::~MateriaSource(void)
 {
-	// for (int i = 0; i < 4; i++)
-	// {
-	// 	if (this->_materia[i] != NULL)
-	// 		delete this->_materia[i];
-	// }
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->_materia[i] != NULL)
+			delete this->_materia[i];
+	}
 	std::cout << "MateriaSource has been deconstructed" << std::endl;
 }
