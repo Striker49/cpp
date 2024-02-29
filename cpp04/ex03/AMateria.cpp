@@ -9,7 +9,6 @@ AMateria::AMateria(void)
 AMateria::AMateria(std::string const & type) : _type(type)
 {
 	std::cout << this->_type << " AMateria has been created" << std::endl;
-
 }
 
 AMateria::AMateria(AMateria const& src)
@@ -32,8 +31,12 @@ std::string const & AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
-	(void)target;
-	// std::cout << " uses a spell on " << target.getName() << std::endl;
+		if (this->getType() == "ice")
+			std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+		else if (this->getType() == "cure")
+			std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
+		else
+			std::cout << "* uses a spell on " << target.getName() << " *" << std::endl;
 }
 
 AMateria::~AMateria(void)
