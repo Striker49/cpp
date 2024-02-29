@@ -19,11 +19,10 @@ class AAnimal
 		std::string _type;
 
 	public:
-							AAnimal( void );
-							AAnimal( AAnimal const& src );
-
-					AAnimal& operator=(AAnimal const& rhs);
-		virtual 			~AAnimal() = 0;
-		virtual std::string getType() const = 0;
-		virtual void 		makeSound() const = 0;
+		AAnimal	( void );
+		AAnimal	( AAnimal const& src );
+		AAnimal&	operator=(AAnimal const& rhs);
+		virtual	~AAnimal() = 0;
+		virtual	std::string getType() const = 0;
+		virtual void	makeSound() const = 0;
 };

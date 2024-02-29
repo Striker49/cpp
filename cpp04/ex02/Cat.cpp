@@ -15,17 +15,20 @@ Cat::~Cat( void )
 
 Cat::Cat( Cat const& src )
 {
-	Cat* temp = new Cat;
-	temp = new Cat;
-	temp->_type = src._type;
-	*this = *temp;
+	Cat* copy = new Cat;
+	copy->_type = src._type;
+	copy->_brain = src._brain;
+	*this = *copy;
 }
 
 Cat& Cat::operator=( Cat const& rhs )
 {
 	if (this != &rhs)
 	{
-		this->_type = rhs._type;
+		Cat* copy = new Cat;
+		copy->_type = rhs._type;
+		copy->_brain = rhs._brain;
+		*this = *copy;
 	}
 	return (*this);
 }

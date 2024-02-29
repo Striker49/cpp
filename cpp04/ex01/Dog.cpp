@@ -15,14 +15,20 @@ Dog::~Dog( void )
 
 Dog::Dog( Dog const& src )
 {
-	*this = src;
+	Dog* copy = new Dog;
+	copy->_type = src._type;
+	copy->_brain = src._brain;
+	*this = *copy;
 }
 
 Dog& Dog::operator=( Dog const& rhs )
 {
 	if (this != &rhs)
 	{
-		this->_type = rhs._type;
+		Dog* copy = new Dog;
+		copy->_type = rhs._type;
+		copy->_brain = rhs._brain;
+		*this = *copy;
 	}
 	return (*this);
 }
