@@ -15,10 +15,7 @@ Dog::~Dog( void )
 
 Dog::Dog( Dog const& src )
 {
-	Dog* copy = new Dog;
-	copy->_type = src._type;
-	copy->_brain = src._brain;
-	*this = *copy;
+	this->_brain = new Brain(*src._brain);
 }
 
 Dog& Dog::operator=( Dog const& rhs )

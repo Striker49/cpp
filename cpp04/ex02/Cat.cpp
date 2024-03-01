@@ -15,10 +15,7 @@ Cat::~Cat( void )
 
 Cat::Cat( Cat const& src )
 {
-	Cat* copy = new Cat;
-	copy->_type = src._type;
-	copy->_brain = src._brain;
-	*this = *copy;
+	this->_brain = new Brain(*src._brain);
 }
 
 Cat& Cat::operator=( Cat const& rhs )

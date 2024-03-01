@@ -2,7 +2,7 @@ NAME = AnimalBrain
 
 CC = c++
 
-CFLAGS = -Werror -Wextra -Wall -std=c++98 -Wshadow
+CFLAGS = -Werror -Wextra -Wall -std=c++98 -Wshadow #-fsanitize=address
 
 SRC = Animal.cpp \
 	Brain.cpp \
