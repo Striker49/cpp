@@ -142,7 +142,13 @@ int	main()
 
 	std::cout << std::endl;
 	Form *rrf2;
-	rrf2 = internA.makeForm("random", "whatever");
-
+	try {
+		rrf2 = internA.makeForm("random", "whatever");
+		rrf2->getName();
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 	return (0);
 }
