@@ -74,12 +74,6 @@ int main()
 	identify(*scd);
 	std::cout << std::endl;
 
-	Base *null = NULL;
-	std::cout << "NULL ptr";
-	identify(null);
-	std::cout << "NULL reference" << std::endl;
-	identify(*null);
-
 	delete fst;
 	delete scd;
 }
