@@ -179,13 +179,14 @@ int main(int argc, char **argv)
 // int main()
 // {
 
-// 	// std::string const str("0");
+// 	std::string const str("0");
 // 	// std::string const str("42");
 // 	// std::string const str("24.0f");
 // 	// std::string const str("1345.0f");
 // 	// std::string const str("nan");
 // 	// std::string const str("-2147483650");
 // 	// std::string const str("2147483648");
+// 	// std::string const str("2147483648333333333333333333333");
 // 	// std::string const str("random_string");
 
 // 	Conversion a;
