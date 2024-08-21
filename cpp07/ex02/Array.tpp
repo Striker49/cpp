@@ -3,7 +3,7 @@
 template <typename T>
 Array<T>::Array(void)
 {
-	_array = nullptr;
+	_array = static_cast<int*>(0);       
 	_size = 0;
 }
 

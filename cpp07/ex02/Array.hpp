@@ -16,3 +16,5 @@ class Array
 		T const&operator[](unsigned int index) const;
 		T &operator[](unsigned int index);
 };
+
+#include "Array.tpp"
