@@ -15,4 +15,7 @@ class Array
 		Array<T> &operator=(Array<T> const& rhs);
 		T const&operator[](unsigned int index) const;
 		T &operator[](unsigned int index);
+		unsigned int size() const;
 };
+
+#include "Array.tpp"
