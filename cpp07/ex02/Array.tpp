@@ -3,7 +3,11 @@
 template <typename T>
 Array<T>::Array(void)
 {
+<<<<<<< HEAD
+	_array = static_cast<int*>(0);       
+=======
 	_array = static_cast<T *>(0);
+>>>>>>> d9c8fc03318d4aeba935ea3c8483bdb88608322f
 	_size = 0;
 }
 
