@@ -1,14 +1,16 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap( void ) :  ClapTrap("", 100, 50, 30), ScavTrap(), FragTrap(), _name("")
+DiamondTrap::DiamondTrap( void ) :  ClapTrap(""), ScavTrap(), FragTrap(), _name("")
 {
 	this->_hp = FragTrap::_hp;
+	this->_ad = FragTrap::_ad;
+	this->_ep = ScavTrap::_hp;
 	std::cout << "DiamondTrap, " << this->_name << " a legendary being, has acended" << std::endl;
 }
 
 DiamondTrap::DiamondTrap( std::string const& name ) :  ClapTrap(name + "_clap_name", 100, 50, 30), ScavTrap(name), FragTrap(name), _name(name)
 {
-	std::cout << "DiamondTrap, the legendary being " << this->_name << ", has acended" << std::endl;
+	std::cout << "DiamondTrap, the legendary being " << this->_name << ", has ascended" << std::endl;
 }
 
 DiamondTrap::~DiamondTrap( void )
@@ -47,4 +49,12 @@ void	DiamondTrap::whoAmI( void )
 		std::cout << "\033[1;29m" << "My name is " << this->_name << "\033[1;37m" << std::endl;
 		std::cout << "\033[1;29m" << "My ClapTrap name is " << this->ClapTrap::_name << "\033[1;37m" << std::endl;
 	}
+}
+
+void	DiamondTrap::displayStats( void )
+{
+	std::cout << "These are the stats for " << _name << std::endl;
+	std::cout << "HP: " << _hp << std::endl;
+	std::cout << "AD: " << _ad << std::endl;
+	std::cout << "EP: " << _ep << std::endl;
 }

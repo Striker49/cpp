@@ -6,6 +6,7 @@
 int	main( void )
 {
 	DiamondTrap Francoma("Francoma the SmartyPants");
+	Francoma.displayStats();
 	DiamondTrap Eboyce("Eboyce the Edgelord");
 
 	std::cout << std::endl << std::endl;
@@ -26,6 +27,7 @@ int	main( void )
 	Francoma.guardGate();
 
 	std::cout << std::endl << std::endl;
+	Francoma.displayStats();
 
 	return (0);
 }
