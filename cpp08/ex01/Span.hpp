@@ -10,18 +10,20 @@ class Span
 {
 private:
 	size_t _n;
+	size_t _count;
 	std::vector<int> _vec;
 public:
 	Span(void);
-	Span(int n);
+	Span(unsigned int n);
 	Span(Span const& src);
 	~Span(void);
 	Span& operator=(Span const& rhs);
 
-	void addNumber(int number);
+	void addNumber(unsigned int number);
 	void addRange(size_t begin, size_t end);
 	int shortestSpan();
 	int longestSpan();
+	int size();
 
 	void displayVec();
 
@@ -39,4 +41,10 @@ class NotEnoughElements : public std::exception
 		virtual const char *what() const throw();
 };
 
-int generate();
+class WrongRange : public std::exception
+{
+	public:
+		virtual const char *what() const throw();
+};
+
+void generate(int &element);

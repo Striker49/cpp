@@ -1,68 +1,75 @@
 #include "MutantStack.hpp"
 
 template <typename T>
-Array<T>::Array(void)
+MutantStack<T>::MutantStack(void) : std::stack<T>()
 {
-	_array = static_cast<T *>(0);
-	_size = 0;
 }
 
 template <typename T>
-Array<T>::Array(unsigned int n)
+MutantStack<T>::MutantStack(MutantStack const& src)
 {
-	_array = new T[n];
-	_size = n;
-	for (unsigned int i = 0; i < _size; i++)
-		_array[i] = '\0';
-}
-
-template <typename T>
-Array<T>::Array(Array<T> const& src)
-{
-	_size = 0;
-	_array = static_cast<T *>(0);
 	*this = src;
 }
 
 template <typename T>
-Array<T>& Array<T>::operator=(Array<T> const& rhs)
+MutantStack<T>& MutantStack<T>::operator=(MutantStack<T> const& rhs)
 {
 	if (this != &rhs)
 	{
-		if (_array)
-			delete [] _array;
-		_size = rhs._size;
-		_array = new T[_size];
-		for (unsigned int i = 0; i < _size; i++)
-			_array[i] = rhs._array[i];
 	}
 	return *this;
 }
 
 template <typename T>
-Array<T>::~Array(void)
+MutantStack<T>::~MutantStack(void)
 {
-	delete [] _array;
 }
 
 template <typename T>
-T const &Array<T>::operator[](unsigned int index) const
+T &MutantStack<T>::operator++(int)
 {
-	if (index >= _size)
-		throw(std::exception());
-	return(_array[index]);
+	typename std::stack<T>::iterator tmp = *this;
+	++(*this);
+	return (tmp);
 }
 
 template <typename T>
-T &Array<T>::operator[](unsigned int index)
+T &MutantStack<T>::operator++()
 {
-	if (index >= _size)
-		throw(std::exception());
-	return(_array[index]);
+	std::stack<T>::iterator++;
+	return (*this);
 }
 
 template <typename T>
-unsigned int Array<T>::size() const
+typename std::stack<T>::container_type::iterator MutantStack<T>::begin()
 {
-	return (_size);
+	return (this->c.begin());
+}
+
+template <typename T>
+typename std::stack<T>::container_type::iterator MutantStack<T>::end()
+{
+	return (this->c.end());
+}
+
+template <typename T>
+typename std::stack<T>::container_type::const_iterator MutantStack<T>::begin() const
+{
+	return (this->c.begin());
+}
+
+template <typename T>
+typename std::stack<T>::container_type::const_iterator MutantStack<T>::end() const
+{
+	return (this->c.end());
+}
+
+template <typename T>
+void MutantStack<T>::displayStack()
+{
+	typename MutantStack<T>::iterator ite = end();
+	for (typename MutantStack<T>::iterator it = begin(); it != ite; it++)
+		std::cout << *it << std::endl;
+	std::cout << std::endl;
+
 }

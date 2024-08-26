@@ -1,21 +1,27 @@
 #pragma once
 #include <iostream>
+#include <stack>
+#include <list>
+#include <algorithm>
 
 template <typename T>
-class Array
+class MutantStack : public std::stack<T>
 {
 	private:
-		T *_array;
-		unsigned int _size;
 	public:
-		Array<T>(void);
-		Array<T>(unsigned int n);
-		Array<T>(Array<T> const& src);
-		~Array<T>(void);
-		Array<T> &operator=(Array<T> const& rhs);
-		T const&operator[](unsigned int index) const;
-		T &operator[](unsigned int index);
-		unsigned int size() const;
+	typedef typename std::stack<T>::container_type::iterator iterator;
+	typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+		MutantStack<T>(void);
+		MutantStack<T>(MutantStack const& src);
+		~MutantStack<T>(void);
+		MutantStack<T> &operator=(MutantStack<T> const& rhs);
+		T &operator++(int);
+		T &operator++();
+		iterator begin();
+		iterator end();
+		const_iterator begin() const;
+		const_iterator end() const;
+		void displayStack();
 };
 
-#include "Array.tpp"
+#include "MutantStack.tpp"
