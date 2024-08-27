@@ -28,11 +28,15 @@ int main()
 	std::cout << std::endl << "----Too many addNumber----" << std::endl;
 	try{
 		Span sp = Span(5);
+		std::cout << std::endl << "Span sp = Span(5)" << std::endl << std::endl;
 		sp.addNumber(6);
 		sp.addNumber(3);
 		sp.addNumber(17);
 		sp.addNumber(9);
 		sp.addNumber(11);
+		std::cout << "Vector size: " << sp.size() << std::endl;
+		sp.displayVec();
+		std::cout << "<<Trying to add '20' to the stack>>" << std::endl;
 		sp.addNumber(20);
 
 		std::cout << sp.shortestSpan() << std::endl;
@@ -50,8 +54,12 @@ int main()
 	std::cout << std::endl << "----Only one element in vector----" << std::endl;
 	try{
 		Span sp = Span(5);
+		std::cout << std::endl << "Span sp = Span(5)" << std::endl << std::endl;
 		sp.addNumber(6);
+		std::cout << "Vector size: " << sp.size() << std::endl;
+		sp.displayVec();
 
+		std::cout << "<<Trying to find shortest/longest span>>" << std::endl;
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 	}
@@ -68,16 +76,56 @@ int main()
 
 	try{
 		Span rg = Span(10);
-		rg.addRange(0, 9);
-		std::cout << "<<Generated Vector>>" << std::endl;
-		std::cout << std::endl;
-		rg.displayVec();
-		std::cout << std::endl;
+		std::cout << std::endl << "Span rg = Span(10)" << std::endl << std::endl;
+		rg.addNumberImproved(10);
+		std::cout << "rg.addNumberImproved(10);" << std::endl << std::endl;
 		std::cout << "Vector size: " << rg.size() << std::endl;
+		rg.displayVec();
 		std::cout << ">>shortestSpan: " << rg.shortestSpan() << std::endl;
 		std::cout << ">>longestSpan: " << rg.longestSpan() << std::endl;
 	}
 	catch(const WrongRange &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch(const VecFull &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch(const NotEnoughElements &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "----Improved addNumber exceed----" << std::endl;
+
+	try{
+		Span rg = Span(10);
+		std::cout << std::endl << "Span rg = Span(10)" << std::endl << std::endl;
+		std::cout << "rg.addNumberImproved(5);" << std::endl << std::endl;
+		rg.addNumberImproved(5);
+		rg.displayVec();
+		std::cout << "rg.addNumberImproved(5);" << std::endl << std::endl;
+		rg.addNumberImproved(5);
+		rg.displayVec();
+		std::cout << "rg.addNumberImproved(5);" << std::endl << std::endl;
+		rg.addNumberImproved(5);
+		rg.displayVec();
+		std::cout << "Vector size: " << rg.size() << std::endl;
+		rg.displayVec();
+		std::cout << std::endl;
+		std::cout << ">>shortestSpan: " << rg.shortestSpan() << std::endl;
+		std::cout << ">>longestSpan: " << rg.longestSpan() << std::endl;
+	}
+	catch(const WrongRange &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch(const VecFull &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch(const NotEnoughElements &e)
 	{
 		std::cout << e.what() << std::endl;
 	}

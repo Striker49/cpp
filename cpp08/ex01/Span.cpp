@@ -10,7 +10,6 @@ Span::Span(unsigned int n)
 {
 	_n = n;
 	_count = 0;
-	_vec.resize(n);
 }
 
 Span::Span(Span const& src)
@@ -41,12 +40,13 @@ void Span::addNumber(unsigned int number)
 		throw(VecFull());
 }
 
-void Span::addRange(size_t begin, size_t end)
+void Span::addNumberImproved(size_t range)
 {
-	if (end <= _n && begin < end)
+	if ((range + _count) <= _n)
 	{
-		std::for_each(_vec.begin() + begin, _vec.begin() + end, generate);
-		_count = _n;
+		for (size_t i = 0; i < range; i++)
+			addNumber(generate());
+		// _count = end;
 	}
 	else
 		throw(WrongRange());
@@ -76,13 +76,14 @@ int Span::longestSpan()
 
 int Span::size()
 {
-	return (_n);
+	return (_count);
 }
 
 void Span::displayVec()
 {
 	for (std::vector<int>::iterator it = _vec.begin(); it != _vec.begin() + _count; it++)
 		std::cout << *it << std::endl;
+	std::cout << std::endl;
 }
 
 const char *VecFull::what() const throw()
@@ -97,10 +98,11 @@ const char *NotEnoughElements::what() const throw()
 
 const char *WrongRange::what() const throw()
 {
-	return ("Range doesn't fit in the span..!");
+	return ("There's not enough room to add that many in the span..!");
 }
 
-void generate(int &element)
+unsigned int generate()
 {
-	element = rand() % 1000;
+	unsigned int element = rand() % 1000;
+	return (element);
 }
