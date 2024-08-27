@@ -72,12 +72,22 @@ int main()
 		std::cout << e.what() << std::endl;
 	}
 
+	std::cout << std::endl << "----Creating new vector----" << std::endl << std::endl;
+
+	std::vector<int> newVec;
+	newVec.resize(10);
+	for_each(newVec.begin(), (newVec.end()), generate);
+	std::cout << "Vector size: " << newVec.size() << std::endl;
+	for (std::vector<int>::iterator it = newVec.begin(); it != newVec.end(); it++)
+		std::cout << *it << std::endl;
+
 	std::cout << std::endl << "----Improved addNumber----" << std::endl;
 
 	try{
+
 		Span rg = Span(10);
-		std::cout << std::endl << "Span rg = Span(10)" << std::endl << std::endl;
-		rg.addNumberImproved(10);
+		std::cout << std::endl << "rg.addNumberImproved(newVec.begin(), newVec.end());" << std::endl << std::endl;
+		rg.addNumberImproved(newVec.begin(), newVec.end());
 		std::cout << "rg.addNumberImproved(10);" << std::endl << std::endl;
 		std::cout << "Vector size: " << rg.size() << std::endl;
 		rg.displayVec();
@@ -102,14 +112,14 @@ int main()
 	try{
 		Span rg = Span(10);
 		std::cout << std::endl << "Span rg = Span(10)" << std::endl << std::endl;
-		std::cout << "rg.addNumberImproved(5);" << std::endl << std::endl;
-		rg.addNumberImproved(5);
+		std::cout << "rg.addNumberImproved(newVec.begin(), newVec.begin() + 5)" << std::endl << std::endl;
+		rg.addNumberImproved(newVec.begin(), newVec.begin() + 5);
 		rg.displayVec();
-		std::cout << "rg.addNumberImproved(5);" << std::endl << std::endl;
-		rg.addNumberImproved(5);
+		std::cout << "rg.addNumberImproved(newVec.begin() + 5, newVec.end())" << std::endl << std::endl;
+		rg.addNumberImproved(newVec.begin(), newVec.begin() + 5);
 		rg.displayVec();
-		std::cout << "rg.addNumberImproved(5);" << std::endl << std::endl;
-		rg.addNumberImproved(5);
+		std::cout << "rg.addNumberImproved(newVec.begin(), newVec.begin() + 5)" << std::endl << std::endl;
+		rg.addNumberImproved(newVec.begin(), newVec.begin() + 5);
 		rg.displayVec();
 		std::cout << "Vector size: " << rg.size() << std::endl;
 		rg.displayVec();

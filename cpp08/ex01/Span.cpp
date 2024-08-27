@@ -40,13 +40,12 @@ void Span::addNumber(unsigned int number)
 		throw(VecFull());
 }
 
-void Span::addNumberImproved(size_t range)
+void Span::addNumberImproved(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	if ((range + _count) <= _n)
+	if ((end - begin + _count) <= _n)
 	{
-		for (size_t i = 0; i < range; i++)
-			addNumber(generate());
-		// _count = end;
+		for (std::vector<int>::iterator it = begin; it != end; it++)
+			addNumber(*it);
 	}
 	else
 		throw(WrongRange());
@@ -101,8 +100,7 @@ const char *WrongRange::what() const throw()
 	return ("There's not enough room to add that many in the span..!");
 }
 
-unsigned int generate()
+void generate(int &element)
 {
-	unsigned int element = rand() % 1000;
-	return (element);
+	element = rand() % 1000;
 }

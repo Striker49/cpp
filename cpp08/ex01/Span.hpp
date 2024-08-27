@@ -20,7 +20,7 @@ public:
 	Span& operator=(Span const& rhs);
 
 	void addNumber(unsigned int number);
-	void addNumberImproved(size_t range);
+	void addNumberImproved(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 	int shortestSpan();
 	int longestSpan();
 	int size();
@@ -47,4 +47,4 @@ class WrongRange : public std::exception
 		virtual const char *what() const throw();
 };
 
-unsigned int generate(void);
+void generate(int &element);
