@@ -23,7 +23,7 @@ public:
 	void displayVec();
 
 	template <typename T>
-	void addNumberImproved(T begin, T end);
+	void addNumberImproved(T const begin, T const end);
 
 };
 

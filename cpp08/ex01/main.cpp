@@ -86,6 +86,7 @@ int main()
 	try{
 
 		Span rg = Span(10);
+		std::cout << std::endl << "Span rg = Span(10);" << std::endl << std::endl;
 		std::cout << std::endl << "rg.addNumberImproved(newVec.begin(), newVec.end());" << std::endl << std::endl;
 		rg.addNumberImproved(newVec.begin(), newVec.end());
 		std::cout << "rg.addNumberImproved(10);" << std::endl << std::endl;
