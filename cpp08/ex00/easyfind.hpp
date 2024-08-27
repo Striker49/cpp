@@ -3,6 +3,7 @@
 #include <list>
 #include <deque>
 #include <map>
+#include <algorithm>
 
 template <typename T>
 void easyfind( T const x, int const integer);

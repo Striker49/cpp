@@ -1,16 +1,13 @@
 #pragma once
-#include <cstring>
-#include <cstdlib>
 #include <iostream>
-#include <string>
-#include <iomanip>
 #include <vector>
+#include <deque>
+#include <algorithm>
 
 class Span
 {
 private:
 	size_t _n;
-	size_t _count;
 	std::vector<int> _vec;
 public:
 	Span(void);
@@ -20,12 +17,13 @@ public:
 	Span& operator=(Span const& rhs);
 
 	void addNumber(unsigned int number);
-	void addNumberImproved(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 	int shortestSpan();
 	int longestSpan();
 	int size();
-
 	void displayVec();
+
+	template <typename T>
+	void addNumberImproved(T begin, T end);
 
 };
 
@@ -48,3 +46,5 @@ class WrongRange : public std::exception
 };
 
 void generate(int &element);
+
+#include "Span.tpp"

@@ -3,13 +3,11 @@
 Span::Span(void)
 {
 	_n = 10;
-	_count = 0;
 }
 
 Span::Span(unsigned int n)
 {
 	_n = n;
-	_count = 0;
 }
 
 Span::Span(Span const& src)
@@ -21,6 +19,9 @@ Span& Span::operator=(Span const& rhs)
 {
 	if (this != &rhs)
 	{
+		_n = rhs._n;
+		_vec.clear();
+		_vec = rhs._vec;
 	}
 	return *this;
 }
@@ -31,29 +32,15 @@ Span::~Span(void)
 
 void Span::addNumber(unsigned int number)
 {
-	if (_count < _n)
-	{
-		_count++;
+	if (_vec.size() < _n)
 		_vec.push_back(number);
-	}
 	else
 		throw(VecFull());
 }
 
-void Span::addNumberImproved(std::vector<int>::iterator begin, std::vector<int>::iterator end)
-{
-	if ((end - begin + _count) <= _n)
-	{
-		for (std::vector<int>::iterator it = begin; it != end; it++)
-			addNumber(*it);
-	}
-	else
-		throw(WrongRange());
-}
-
 int Span::shortestSpan()
 {
-	if (_count <= 1)
+	if (_vec.size() <= 1)
 		throw(NotEnoughElements());
 	std::sort(_vec.begin(), _vec.end());
 	int temp = abs(_vec[0] - _vec[1]);
@@ -67,7 +54,7 @@ int Span::shortestSpan()
 
 int Span::longestSpan()
 {
-	if (_count <= 1)
+	if (_vec.size() <= 1)
 		throw(NotEnoughElements());
 	std::sort(_vec.begin(), _vec.end());
 	return (_vec.back() - _vec.front());
@@ -75,19 +62,19 @@ int Span::longestSpan()
 
 int Span::size()
 {
-	return (_count);
+	return (_vec.size());
 }
 
 void Span::displayVec()
 {
-	for (std::vector<int>::iterator it = _vec.begin(); it != _vec.begin() + _count; it++)
+	for (std::vector<int>::iterator it = _vec.begin(); it != _vec.end(); it++)
 		std::cout << *it << std::endl;
 	std::cout << std::endl;
 }
 
 const char *VecFull::what() const throw()
 {
-	return ("Vec already full..!");
+	return ("Span is already full..!");
 }
 
 const char *NotEnoughElements::what() const throw()

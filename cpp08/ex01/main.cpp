@@ -36,7 +36,7 @@ int main()
 		sp.addNumber(11);
 		std::cout << "Vector size: " << sp.size() << std::endl;
 		sp.displayVec();
-		std::cout << "<<Trying to add '20' to the stack>>" << std::endl;
+		std::cout << ">>sp.addNumber(20)" << std::endl;
 		sp.addNumber(20);
 
 		std::cout << sp.shortestSpan() << std::endl;
@@ -59,7 +59,7 @@ int main()
 		std::cout << "Vector size: " << sp.size() << std::endl;
 		sp.displayVec();
 
-		std::cout << "<<Trying to find shortest/longest span>>" << std::endl;
+		std::cout << ">>sp.shortestSpan()" << std::endl;
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 	}
@@ -72,7 +72,7 @@ int main()
 		std::cout << e.what() << std::endl;
 	}
 
-	std::cout << std::endl << "----Creating new vector----" << std::endl << std::endl;
+	std::cout << std::endl << "----Creating a vector----" << std::endl << std::endl;
 
 	std::vector<int> newVec;
 	newVec.resize(10);
@@ -107,7 +107,7 @@ int main()
 		std::cout << e.what() << std::endl;
 	}
 
-	std::cout << std::endl << "----Improved addNumber exceed----" << std::endl;
+	std::cout << std::endl << "----Improved addNumber exceeds span----" << std::endl;
 
 	try{
 		Span rg = Span(10);
