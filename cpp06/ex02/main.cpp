@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <time.h>
 
+class D : public Base {};
+
 Base *generate()
 {
 	int random = rand() % 3;
@@ -38,21 +40,23 @@ void identify(Base &p)
 		std::cout << "& is from A Class" << std::endl;
 		(void)a;
 	}
-	catch(std::bad_cast&){}
+	catch(const std::bad_cast&){}
 	try
 	{
 		B &b = dynamic_cast<B&>(p);
 		std::cout << "& is from B Class" << std::endl;
 		(void)b;
 	}
-	catch(std::bad_cast&){}
+	catch(const std::bad_cast&){}
 	try
 	{
 		C &c = dynamic_cast<C&>(p);
 		std::cout << "& is from C Class" << std::endl;
 		(void)c;
 	}
-	catch(std::bad_cast&){}
+	catch(const std::bad_cast&){
+		std::cout << " is unidentifiable..!" << std::endl;
+	}
 }
 
 int main()
@@ -74,6 +78,14 @@ int main()
 	identify(*scd);
 	std::cout << std::endl;
 
+	Base *trd = new D;
+	std::cout << "trd";
+	identify(trd);
+	std::cout << "trd reference";
+	identify(*trd);
+	std::cout << std::endl;
+
 	delete fst;
 	delete scd;
+	delete trd;
 }
