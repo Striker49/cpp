@@ -13,6 +13,12 @@ size_t getTime() {
 	return (result);
 }
 
+bool findDuplicate(std::vector<int> *vec, std::vector<int>::iterator it) {
+	if (find(vec->begin(), vec->end(), *it) != vec->end() && find(vec->begin(), vec->end(), *it) != it)
+		return (true);
+	return (false);
+}
+
 int parseInput(char **argv, int argc, std::vector<int> *vec, std::deque<int> *deq) {
 
 	std::string str;
@@ -24,6 +30,10 @@ int parseInput(char **argv, int argc, std::vector<int> *vec, std::deque<int> *de
 			return (std::cout << "Error" << std::endl, 1);
 		vec->push_back(std::stoi(str));
 		deq->push_back(std::stoi(str));
+	}
+	for (std::vector<int>::iterator it = vec->begin(); it != vec->end(); it++) {
+		if (findDuplicate(vec, it))
+			return (std::cout << "Duplicates are not allowed" << std::endl, 1);
 	}
 	return (0);
 }
