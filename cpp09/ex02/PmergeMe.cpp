@@ -124,33 +124,31 @@ std::vector<int> *insertElements(std::vector<int> *S, std::vector<int> *pend) {
 			n = S->size();
 			printElements(*S);
 		}
-		else if ((*pend)[0] < (*S)[left])
-		{
-			std::cout << "Last pend[0] < S[left] " << "mid: " << mid << "p" << (*S)[mid] << std::endl;
-			std::cout << "Last pend[0] < S[left] " << "pend->front(): " << pend->front() << std::endl;
-			std::cout << "left "  << (*S)[left] << std::endl;
-			std::cout << "right "  << (*S)[right] << std::endl;
-			if (mid % 2 != 0)
-				mid = mid / 2 + 1;
-			else
-				mid = mid / 2;
-			left = mid - 1;
-			right = mid + 1;
-			std::cout << "left " << left << std::endl;
-			std::cout << "right " << right << std::endl;
+		else if (pend->front() < (*S)[left]) {
+			if (left < n / 2)
+			{
+				mid = left / 2;
+				left = mid - 1;
+				right = mid + 1;
+			}
+			else {
+				mid = (mid + left) / 2;
+				left = mid - 1;
+				right = mid + 1;
+			}
 		}
-		else if ((*pend)[0] > (*S)[right])
-		{
-			std::cout << "Last pend[0] > S[right]" << "mid: " << mid << "p" << (*S)[mid] << std::endl;
-			std::cout << "Last pend[0] > S[right] " << "pend->front(): " << pend->front() << std::endl;
-			std::cout << "left "  << (*S)[left] << std::endl;
-			std::cout << "right "  << (*S)[right] << std::endl;
-			if (mid % 2 != 0)
-				mid = std::max(n - 2, mid / 2 + 1);
-			else
-				mid = std::max(n - 2, mid / 2);
-			left = mid - 1;
-			right = mid + 1;
+		else if (pend->front() > (*S)[right]) {
+			if (left < n / 2)
+			{
+				mid = mid + right / 2;
+				left = mid - 1;
+				right = mid + 1;
+			}
+			else {
+				mid = (right + n) / 2;
+				left = mid - 1;
+				right = mid + 1;
+			}
 		}
 	}
 	return (S);
