@@ -83,7 +83,7 @@ void createS(std::vector<std::pair<int, int> > *pairs, std::vector<int> *S, std:
 	(*pairs).clear();
 }
 
-void insertElements(std::vector<int> *S, std::vector<int> *pend) {
+std::vector<int> *insertElements(std::vector<int> *S, std::vector<int> *pend) {
 	//insert first pend element in front of S
 	S->insert(S->begin(), (*pend)[0]);
 	pend->erase(pend->begin(), pend->begin() + 1);
@@ -95,16 +95,25 @@ void insertElements(std::vector<int> *S, std::vector<int> *pend) {
 		mid = n / 2;
 	int left = mid - 1;
 	int right = mid + 1;
-	std::cout << "start mid value: "<<  (*S)[mid] << std::endl;
-	std::cout << "start left value: "<<  (*S)[left] << std::endl;
-	std::cout << "start right value: "<<  (*S)[right] << std::endl;
 	while (!pend->empty())
 	{
 		// std::cout << "Searching insertion placemement for [" << pend->front() << "]" << "mid: " <<  mid << std::endl;
-		if ((pend->front() > (*S)[left] && pend->front() < (*S)[right]) || mid == 0 || mid == n)
+		if ((left == 0 && pend->front() < (*S)[left]) || (right == n && pend->front() > (*S)[right]) || (pend->front() > (*S)[left] && pend->front() < (*S)[mid]) || (pend->front() < (*S)[right] && pend->front() > (*S)[mid]))
 		{
 			// std::cout << "Found insertion placemement for [" << pend->front() << "]" << std::endl;
-			S->insert(S->begin() + left + 1, pend->front());
+			// std::cout << "n "  << n << std::endl;
+			// std::cout << "left "  << (*S)[left] << std::endl;
+			// std::cout << "right "  << (*S)[right] << std::endl;
+			// std::cout << "Last pend[0] < S[left] " << "mid: " << mid << "p" << (*S)[mid] << std::endl;
+
+			if (pend->front() < (*S)[left])
+				S->insert(S->begin() + left, pend->front());
+			else if (pend->front() > (*S)[right])
+				S->insert(S->begin() + right, pend->front());
+			else if (pend->front() > (*S)[left] && pend->front() < mid)
+				S->insert(S->begin() + mid, pend->front());
+			else
+				S->insert(S->begin() + mid, pend->front());
 			pend[0].erase(pend->begin(), pend->begin() + 1);
 			if (S->size() % 2 != 0)
 				mid = S->size() / 2 + 1;
@@ -115,26 +124,36 @@ void insertElements(std::vector<int> *S, std::vector<int> *pend) {
 			n = S->size();
 			printElements(*S);
 		}
-		if ((*pend)[0] < (*S)[left])
+		else if ((*pend)[0] < (*S)[left])
 		{
 			std::cout << "Last pend[0] < S[left] " << "mid: " << mid << "p" << (*S)[mid] << std::endl;
-			mid = mid / 2 + 1;
+			std::cout << "Last pend[0] < S[left] " << "pend->front(): " << pend->front() << std::endl;
+			std::cout << "left "  << (*S)[left] << std::endl;
+			std::cout << "right "  << (*S)[right] << std::endl;
+			if (mid % 2 != 0)
+				mid = mid / 2 + 1;
+			else
+				mid = mid / 2;
 			left = mid - 1;
 			right = mid + 1;
-			// std::cout << "n value: "<< n << std::endl;
-			// std::cout << "(*pend)[0]: "<< (*pend)[0] << std::endl;
-			// std::cout << "left left value: " <<  left  << "-" << (*S)[left] << std::endl;
-			// std::cout << "left mid value: " <<  mid  << "-" << (*S)[mid] << std::endl;
-			// std::cout << "left right value: " <<  right  << "-" << (*S)[right] << std::endl;
+			std::cout << "left " << left << std::endl;
+			std::cout << "right " << right << std::endl;
 		}
 		else if ((*pend)[0] > (*S)[right])
 		{
-			std::cout << "Last pend[0] > S[right]" << "mid: " <<  (*S)[mid] << std::endl;
-			mid += mid / 2 + 1;
+			std::cout << "Last pend[0] > S[right]" << "mid: " << mid << "p" << (*S)[mid] << std::endl;
+			std::cout << "Last pend[0] > S[right] " << "pend->front(): " << pend->front() << std::endl;
+			std::cout << "left "  << (*S)[left] << std::endl;
+			std::cout << "right "  << (*S)[right] << std::endl;
+			if (mid % 2 != 0)
+				mid = std::max(n - 2, mid / 2 + 1);
+			else
+				mid = std::max(n - 2, mid / 2);
 			left = mid - 1;
 			right = mid + 1;
 		}
 	}
+	return (S);
 }
 
 void algorithm(std::vector<int> *vec, std::deque<int> *deq) {
@@ -188,17 +207,17 @@ void algorithm(std::vector<int> *vec, std::deque<int> *deq) {
 	std::cout << "Put bigger in S, smaller and straggler in pend" << std::endl;
 	std::cout << "S elements" << std::endl;
 	if (straggler)
-		S.push_back(straggler);
+		pend.push_back(straggler);
 	printElements(S);
 	std::cout << "Pend elements" << std::endl;
 	printElements(pend);
 
-	insertElements(&S, &pend);
+	vec = insertElements(&S, &pend);
 	std::cout << "Insert pend elements in S" << std::endl;
 	printElements(S);
 
-	std::sort(vec->begin(), vec->end());
-	std::sort(deq->begin(), deq->end());
+	// std::sort(vec->begin(), vec->end());
+	// std::sort(deq->begin(), deq->end());
 	double endTime = getTime();
 	std::cout << "After: ";
 	printElements(*vec);
