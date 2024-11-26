@@ -1,0 +1,1 @@
+pair sorting might be done wrong (too many comparisons?)
