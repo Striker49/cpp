@@ -113,7 +113,7 @@ std::vector<int> *insertElements(std::vector<int> *S, std::vector<int> *pend) {
 			else if (pend->front() > (*S)[left] && pend->front() < mid)
 				S->insert(S->begin() + mid, pend->front());
 			else
-				S->insert(S->begin() + mid, pend->front());
+				S->insert(S->begin() + mid + 1, pend->front());
 			pend[0].erase(pend->begin(), pend->begin() + 1);
 			if (S->size() % 2 != 0)
 				mid = S->size() / 2 + 1;
