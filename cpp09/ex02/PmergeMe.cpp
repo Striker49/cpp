@@ -1,5 +1,13 @@
 #include "PmergeMe.hpp"
 #include "unistd.h"
+#include <string>
+#include <iostream>
+#include <algorithm>
+#include <fstream>
+#include <vector>
+#include <deque>
+#include <ctime>
+#include <iomanip>
 
 int wrongInput(std::string str) {
 	std::cout << str << std::endl;
@@ -8,7 +16,7 @@ int wrongInput(std::string str) {
 }
 
 size_t getTime() {
-	std::time_t result = std::time(NULL);
+	time_t result = time(NULL);
 	// std::cout << result << " seconds since Epoch" << std::endl;
 	return (result);
 }
@@ -97,55 +105,76 @@ std::vector<int> *insertElements(std::vector<int> *S, std::vector<int> *pend) {
 	int right = mid + 1;
 	while (!pend->empty())
 	{
-		// std::cout << "Searching insertion placemement for [" << pend->front() << "]" << "mid: " <<  mid << std::endl;
-		if ((left == 0 && pend->front() < (*S)[left]) || (right == n && pend->front() > (*S)[right]) || (pend->front() > (*S)[left] && pend->front() < (*S)[mid]) || (pend->front() < (*S)[right] && pend->front() > (*S)[mid]))
+		std::cout << "Searching insertion placemement for [" << pend->front() << "]" << std::endl;
+		std::cout << "n "  << n << std::endl;
+		std::cout << "left "  << (*S)[left] << std::endl;
+		std::cout << "mid "  << (*S)[mid] << std::endl;
+		std::cout << "right "  << (*S)[right] << std::endl;
+		printElements(*S);
+		if (( left == 0 && pend->front() < (*S)[left]) || (right == (n - 1) && pend->front() > (*S)[right]) || (pend->front() > (*S)[left] && pend->front() < (*S)[mid]) || (pend->front() < (*S)[right] && pend->front() > (*S)[mid]))
 		{
-			// std::cout << "Found insertion placemement for [" << pend->front() << "]" << std::endl;
+			std::cout << "Found insertion placemement for [" << pend->front() << "]" << std::endl;
 			// std::cout << "n "  << n << std::endl;
 			// std::cout << "left "  << (*S)[left] << std::endl;
 			// std::cout << "right "  << (*S)[right] << std::endl;
 			// std::cout << "Last pend[0] < S[left] " << "mid: " << mid << "p" << (*S)[mid] << std::endl;
 
-			if (pend->front() < (*S)[left])
+			if (pend->front() < (*S)[left]) {
+				std::cout << "1=====" << std::endl;
 				S->insert(S->begin() + left, pend->front());
-			else if (pend->front() > (*S)[right])
-				S->insert(S->begin() + right, pend->front());
-			else if (pend->front() > (*S)[left] && pend->front() < mid)
+			}
+			else if (pend->front() > (*S)[right]) {
+				std::cout << "2=====" << std::endl;
+				std::cout << "inserting: " << pend->front() << std::endl;
+				std::cout << "mid" << (*S)[mid] << std::endl;
+				std::cout << "right" << (*S)[right] << std::endl;
+				S->insert(S->begin() + right + 1, pend->front());
+			}
+			else if (pend->front() > (*S)[left] && pend->front() < (*S)[mid]) {
+				std::cout << "3=====" << std::endl;
+				std::cout << "inserting: " << pend->front() << std::endl;
+				std::cout << "mid" << (*S)[mid] << std::endl;
+				std::cout << "right" << (*S)[right] << std::endl;
 				S->insert(S->begin() + mid, pend->front());
-			else
+			}
+			else if (pend->front() < (*S)[right] && pend->front() > (*S)[mid]) {
+
 				S->insert(S->begin() + mid + 1, pend->front());
-			pend[0].erase(pend->begin(), pend->begin() + 1);
-			if (S->size() % 2 != 0)
-				mid = S->size() / 2 + 1;
+			}
 			else
-				mid = S->size() / 2;
+				S->insert(S->begin() + mid, pend->front());
+			pend[0].erase(pend->begin(), pend->begin() + 1);
+			n = S->size();
+			if (n % 2 != 0)
+				mid = std::max(n - 2, n / 2);
+			else
+				mid = n / 2;
 			left = mid - 1;
 			right = mid + 1;
-			n = S->size();
 			printElements(*S);
 		}
 		else if (pend->front() < (*S)[left]) {
 			if (left < n / 2)
 			{
-				mid = left / 2;
+				mid = std::max(left, std::min(1, left / 2));
 				left = mid - 1;
 				right = mid + 1;
 			}
 			else {
-				mid = (mid + left) / 2;
+				mid = std::max(left, std::min((n / 2), (n / 2 + left) / 2));
 				left = mid - 1;
 				right = mid + 1;
 			}
 		}
 		else if (pend->front() > (*S)[right]) {
-			if (left < n / 2)
+			if (right < n / 2)
 			{
-				mid = mid + right / 2;
+				mid = std::max((n / 2 - 1), std::min(right, ((n / 2) + right) / 2));
 				left = mid - 1;
 				right = mid + 1;
 			}
 			else {
-				mid = (right + n) / 2;
+				mid = std::max(n - 2, std::min(right, (right + n) / 2 - 1));
 				left = mid - 1;
 				right = mid + 1;
 			}
@@ -158,7 +187,7 @@ void algorithm(std::vector<int> *vec, std::deque<int> *deq) {
 	double startTime = getTime();
 	std::vector<int> S;
 	std::vector<int> pend;
-	int straggler;
+	int straggler = 0;
 	int first;
 	int sec;
 	if (vec->size() < 2) {
