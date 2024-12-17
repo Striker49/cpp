@@ -86,21 +86,100 @@ void createJacobsthalSequence(std::vector<int> *vec, std::vector<int> *jacob) {
 	size_t a = 1;
 	size_t b = 1;
 	size_t temp;
-	jacob->push_back((*vec)[b]);
 	std::cout << "Creating Jacobsthal number sequence..." << std::endl;
-	for (size_t i = 0; i < vec->size(); i++) {
+	jacob->push_back(b);
+	std::cout << "vec[" << "0" << "]" << (*vec)[b] << std::endl;
+	for (size_t i = 1; i < vec->size(); i++) {
 		temp = b;
 		b += a * 2;
 		a = temp;
 		if (b > vec->size())
 			break;
-		jacob->push_back((*vec)[b]);
+		jacob->push_back(b);
 		std::cout << "vec[" << i << "]" << (*vec)[b] << std::endl;
 	}
+	std::cout << "jacob numbers: ";
 	printElements(*jacob);
 }
 
-void binaryInsertion(std::vector<int> *S, std::vector<int> *pend) {
+void bi(std::vector<int> *S, std::vector<int> *pend, std::vector<int> *jacob, int *mid, int *left, int *right, int *n) {
+	(void)jacob;
+	// std::cout << "pend->front() " << pend->front() << std::endl;
+	if (( *left == 0 && pend->front() < (*S)[*left]) || (*right == (*n - 1) && pend->front() > (*S)[*right]) || (pend->front() > (*S)[*left] && pend->front() < (*S)[*mid]) || (pend->front() < (*S)[*right] && pend->front() > (*S)[*mid]))
+	{
+		std::cout << "Found insertion placemement for [" << pend->front() << "]" << std::endl;
+		std::cout << "n "  << *n << std::endl;
+		std::cout << "*left "  << (*S)[*left] << std::endl;
+		std::cout << "*right "  << (*S)[*right] << std::endl;
+		std::cout << "Last pend[0] < S[*left] " << "*mid: " << *mid << "p" << (*S)[*mid] << std::endl;
+
+		if (pend->front() < (*S)[*left]) {
+			//std::cout << "1=====" << std::endl;
+			S->insert(S->begin() + *left, pend->front());
+		}
+		else if (pend->front() > (*S)[*right]) {
+			//std::cout << "2=====" << std::endl;
+			//std::cout << "inserting: " << pend->front() << std::endl;
+			//std::cout << "*mid" << (*S)[*mid] << std::endl;
+			//std::cout << "*right" << (*S)[*right] << std::endl;
+			S->insert(S->begin() + *right + 1, pend->front());
+		}
+		else if (pend->front() > (*S)[*left] && pend->front() < (*S)[*mid]) {
+			//std::cout << "3=====" << std::endl;
+			//std::cout << "inserting: " << pend->front() << std::endl;
+			//std::cout << "*mid" << (*S)[*mid] << std::endl;
+			//std::cout << "*right" << (*S)[*right] << std::endl;
+			S->insert(S->begin() + *mid, pend->front());
+		}
+		else if (pend->front() < (*S)[*right] && pend->front() > (*S)[*mid]) {
+
+			S->insert(S->begin() + *mid + 1, pend->front());
+		}
+		else
+			S->insert(S->begin() + *mid, pend->front());
+		pend[0].erase(pend->begin(), pend->begin() + 1);
+		*n = S->size();
+		if (*n % 2 != 0)
+			*mid = std::max(*n - 2, *n / 2);
+		else
+			*mid = *n / 2;
+		*left = *mid - 1;
+		*right = *mid + 1;
+		printElements(*S);
+		// bi(S, pend, jacob, *mid, *left, *right, n);
+		return;
+	}
+	else if (pend->front() < (*S)[*left]) {
+		if (*left < *n / 2)
+		{
+			*mid = std::max(*left, std::min(1, *left / 2));
+			*left = *mid - 1;
+			*right = *mid + 1;
+		}
+		else {
+			*mid = std::max(*left, std::min((*n / 2), (*n / 2 + *left) / 2));
+			*left = *mid - 1;
+			*right = *mid + 1;
+		}
+	}
+	else if (pend->front() > (*S)[*right]) {
+		if (*right < *n / 2)
+		{
+			*mid = std::max((*n / 2 - 1), std::min(*right, ((*n / 2) + *right) / 2));
+			*left = *mid - 1;
+			*right = *mid + 1;
+		}
+		else {
+			*mid = std::max(*n - 2, std::min(*right, (*right + *n) / 2 - 1));
+			*left = *mid - 1;
+			*right = *mid + 1;
+		}
+	}
+	// std::cout << "pend size: " << pend->size() << std::endl;
+}
+
+void binaryInsertion(std::vector<int> *S, std::vector<int> *pend, std::vector<int> *jacob) {
+	(void)jacob;
 	int n = S->size();
 	int mid;
 	if (S->size() % 2 != 0)
@@ -109,6 +188,83 @@ void binaryInsertion(std::vector<int> *S, std::vector<int> *pend) {
 		mid = n / 2;
 	int left = mid - 1;
 	int right = mid + 1;
+	// int i = 0;
+	// while (!jacob->empty()) {
+	// 	// std::cout << "jacob front: " << jacob->front() << std::endl;
+	// 	if (( left == 0 && (*pend)[jacob->front()] < (*S)[left]) || (right == (n - 1) && (*pend)[jacob->front()] > (*S)[right]) || ((*pend)[jacob->front()] > (*S)[left] && (*pend)[jacob->front()] < (*S)[mid]) || ((*pend)[jacob->front()] < (*S)[right] && (*pend)[jacob->front()] > (*S)[mid]))
+	// 	{
+	// 		//std::cout << "Found insertion placemement for [" << (*pend)[jacob->front()] << "]" << std::endl;
+	// 		// std::cout << "n "  << n << std::endl;
+	// 		// std::cout << "left "  << (*S)[left] << std::endl;
+	// 		// std::cout << "right "  << (*S)[right] << std::endl;
+	// 		// std::cout << "Last pend[0] < S[left] " << "mid: " << mid << "p" << (*S)[mid] << std::endl;
+
+	// 		if ((*pend)[jacob->front()] < (*S)[left]) {
+	// 			//std::cout << "1=====" << std::endl;
+	// 			S->insert(S->begin() + left, (*pend)[jacob->front()]);
+	// 		}
+	// 		else if ((*pend)[jacob->front()] > (*S)[right]) {
+	// 			//std::cout << "2=====" << std::endl;
+	// 			//std::cout << "inserting: " << (*pend)[jacob->front()] << std::endl;
+	// 			//std::cout << "mid" << (*S)[mid] << std::endl;
+	// 			//std::cout << "right" << (*S)[right] << std::endl;
+	// 			S->insert(S->begin() + right + 1, (*pend)[jacob->front()]);
+	// 		}
+	// 		else if ((*pend)[jacob->front()] > (*S)[left] && (*pend)[jacob->front()] < (*S)[mid]) {
+	// 			//std::cout << "3=====" << std::endl;
+	// 			//std::cout << "inserting: " << (*pend)[jacob->front()] << std::endl;
+	// 			//std::cout << "mid" << (*S)[mid] << std::endl;
+	// 			//std::cout << "right" << (*S)[right] << std::endl;
+	// 			S->insert(S->begin() + mid, (*pend)[jacob->front()]);
+	// 		}
+	// 		else if ((*pend)[jacob->front()] < (*S)[right] && (*pend)[jacob->front()] > (*S)[mid]) {
+
+	// 			S->insert(S->begin() + mid + 1, (*pend)[jacob->front()]);
+	// 		}
+	// 		else
+	// 			S->insert(S->begin() + mid, (*pend)[jacob->front()]);
+	// 		pend[jacob->front()].erase(pend->begin() + jacob->front() - i, pend->begin() + jacob->front() - i + 1);
+	// 		n = S->size();
+	// 		if (n % 2 != 0)
+	// 			mid = std::max(n - 2, n / 2);
+	// 		else
+	// 			mid = n / 2;
+	// 		left = mid - 1;
+	// 		right = mid + 1;
+	// 		printElements(*S);
+	// 	}
+	// 	else if ((*pend)[jacob->front()] < (*S)[left]) {
+	// 		if (left < n / 2)
+	// 		{
+	// 			mid = std::max(left, std::min(1, left / 2));
+	// 			left = mid - 1;
+	// 			right = mid + 1;
+	// 		}
+	// 		else {
+	// 			mid = std::max(left, std::min((n / 2), (n / 2 + left) / 2));
+	// 			left = mid - 1;
+	// 			right = mid + 1;
+	// 		}
+	// 	}
+	// 	else if ((*pend)[jacob->front()] > (*S)[right]) {
+	// 		if (right < n / 2)
+	// 		{
+	// 			mid = std::max((n / 2 - 1), std::min(right, ((n / 2) + right) / 2));
+	// 			left = mid - 1;
+	// 			right = mid + 1;
+	// 		}
+	// 		else {
+	// 			mid = std::max(n - 2, std::min(right, (right + n) / 2 - 1));
+	// 			left = mid - 1;
+	// 			right = mid + 1;
+	// 		}
+	// 	}
+	// 	pend->erase(pend->begin() + jacob->front() - i, pend->begin() + jacob->front() - i + 1);
+	// 	jacob->erase(jacob->begin(), jacob->begin() + 1);
+	// 	std::cout << "pend elements2" << std::endl;
+	// 	printElements(*pend);
+	// 	i++;
+	// }
 	while (!pend->empty())
 	{
 		//std::cout << "Searching insertion placemement for [" << pend->front() << "]" << std::endl;
@@ -117,74 +273,8 @@ void binaryInsertion(std::vector<int> *S, std::vector<int> *pend) {
 		//std::cout << "mid "  << (*S)[mid] << std::endl;
 		//std::cout << "right "  << (*S)[right] << std::endl;
 		//printElements(*S);
-		if (( left == 0 && pend->front() < (*S)[left]) || (right == (n - 1) && pend->front() > (*S)[right]) || (pend->front() > (*S)[left] && pend->front() < (*S)[mid]) || (pend->front() < (*S)[right] && pend->front() > (*S)[mid]))
-		{
-			//std::cout << "Found insertion placemement for [" << pend->front() << "]" << std::endl;
-			// std::cout << "n "  << n << std::endl;
-			// std::cout << "left "  << (*S)[left] << std::endl;
-			// std::cout << "right "  << (*S)[right] << std::endl;
-			// std::cout << "Last pend[0] < S[left] " << "mid: " << mid << "p" << (*S)[mid] << std::endl;
-
-			if (pend->front() < (*S)[left]) {
-				//std::cout << "1=====" << std::endl;
-				S->insert(S->begin() + left, pend->front());
-			}
-			else if (pend->front() > (*S)[right]) {
-				//std::cout << "2=====" << std::endl;
-				//std::cout << "inserting: " << pend->front() << std::endl;
-				//std::cout << "mid" << (*S)[mid] << std::endl;
-				//std::cout << "right" << (*S)[right] << std::endl;
-				S->insert(S->begin() + right + 1, pend->front());
-			}
-			else if (pend->front() > (*S)[left] && pend->front() < (*S)[mid]) {
-				//std::cout << "3=====" << std::endl;
-				//std::cout << "inserting: " << pend->front() << std::endl;
-				//std::cout << "mid" << (*S)[mid] << std::endl;
-				//std::cout << "right" << (*S)[right] << std::endl;
-				S->insert(S->begin() + mid, pend->front());
-			}
-			else if (pend->front() < (*S)[right] && pend->front() > (*S)[mid]) {
-
-				S->insert(S->begin() + mid + 1, pend->front());
-			}
-			else
-				S->insert(S->begin() + mid, pend->front());
-			pend[0].erase(pend->begin(), pend->begin() + 1);
-			n = S->size();
-			if (n % 2 != 0)
-				mid = std::max(n - 2, n / 2);
-			else
-				mid = n / 2;
-			left = mid - 1;
-			right = mid + 1;
-			//printElements(*S);
-		}
-		else if (pend->front() < (*S)[left]) {
-			if (left < n / 2)
-			{
-				mid = std::max(left, std::min(1, left / 2));
-				left = mid - 1;
-				right = mid + 1;
-			}
-			else {
-				mid = std::max(left, std::min((n / 2), (n / 2 + left) / 2));
-				left = mid - 1;
-				right = mid + 1;
-			}
-		}
-		else if (pend->front() > (*S)[right]) {
-			if (right < n / 2)
-			{
-				mid = std::max((n / 2 - 1), std::min(right, ((n / 2) + right) / 2));
-				left = mid - 1;
-				right = mid + 1;
-			}
-			else {
-				mid = std::max(n - 2, std::min(right, (right + n) / 2 - 1));
-				left = mid - 1;
-				right = mid + 1;
-			}
-		}
+		bi(S, pend, jacob, &mid, &left, &right, &n);
+		
 	}
 }
 
@@ -196,7 +286,7 @@ std::vector<int> *insertElements(std::vector<int> *S, std::vector<int> *pend) {
 	pend->erase(pend->begin(), pend->begin() + 1);
 	std::vector<int> jacob;
 	createJacobsthalSequence(pend, &jacob);
-	binaryInsertion(S, pend);
+	binaryInsertion(S, pend, &jacob);
 	//binaryInsertion(S, pend);
 	//while (!jacob)
 	
