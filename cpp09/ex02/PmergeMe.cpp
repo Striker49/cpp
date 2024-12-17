@@ -1,13 +1,4 @@
 #include "PmergeMe.hpp"
-#include "unistd.h"
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include <fstream>
-#include <vector>
-#include <deque>
-#include <ctime>
-#include <iomanip>
 
 int wrongInput(std::string str) {
 	std::cout << str << std::endl;
@@ -92,12 +83,12 @@ void createS(std::vector<std::pair<int, int> > *pairs, std::vector<int> *S, std:
 }
 
 void createJacobsthalSequence(std::vector<int> *vec, std::vector<int> *jacob) {
-	int a = 1;
-	int b = 1;
-	int temp;
+	size_t a = 1;
+	size_t b = 1;
+	size_t temp;
 	jacob->push_back((*vec)[b]);
 	std::cout << "Creating Jacobsthal number sequence..." << std::endl;
-	for (int i = 0; i < vec->size(); i++) {
+	for (size_t i = 0; i < vec->size(); i++) {
 		temp = b;
 		b += a * 2;
 		a = temp;
@@ -213,7 +204,7 @@ std::vector<int> *insertElements(std::vector<int> *S, std::vector<int> *pend) {
 }
 
 void algorithm(std::vector<int> *vec, std::deque<int> *deq) {
-	double startTime = getTime();
+	double startTime = clock();
 	std::vector<int> S;
 	std::vector<int> pend;
 	int straggler = 0;
@@ -274,14 +265,14 @@ void algorithm(std::vector<int> *vec, std::deque<int> *deq) {
 
 	// std::sort(vec->begin(), vec->end());
 	// std::sort(deq->begin(), deq->end());
-	double endTime = getTime();
+	double endTime = clock();
 	std::cout << "After: ";
 	printElements(*vec);
 	std::cout << std::endl;
 	std::cout << "Time to process a range of " << vec->size() << " elements with std::vector : " << 
-		std::setprecision(6) << (endTime - startTime) / 1000 << " µs" << std::endl;
+		std::setprecision(6) << (endTime - startTime) << " µs" << std::endl;
 	std::cout << "Time to process a range of " << deq->size() << " elements with std::deque : " << 
-		std::setprecision(6) << (endTime - startTime) / 1000 << " µs" << std::endl;
+		std::setprecision(6) << (endTime - startTime) << " µs" << std::endl;
 }
 
 void compute(std::vector<int> *vec, std::deque<int> *deq) {
