@@ -270,9 +270,9 @@ void algorithm(std::vector<int> *vec, std::deque<int> *deq) {
 	printElements(*vec);
 	std::cout << std::endl;
 	std::cout << "Time to process a range of " << vec->size() << " elements with std::vector : " << 
-		std::setprecision(6) << (endTime - startTime) << " µs" << std::endl;
+		std::fixed << std::setprecision(9) << (endTime - startTime) / 1000000.0 << " s" << std::endl;
 	std::cout << "Time to process a range of " << deq->size() << " elements with std::deque : " << 
-		std::setprecision(6) << (endTime - startTime) << " µs" << std::endl;
+		std::fixed << std::setprecision(9) << (endTime - startTime) / 1000000.0 << " s" << std::endl;
 }
 
 void compute(std::vector<int> *vec, std::deque<int> *deq) {
