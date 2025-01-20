@@ -69,15 +69,29 @@ void sortPairsContainer(std::vector<std::pair<int, int> > *pairs) {
 		next = it;
 		if (curr->first < next->first)
 			continue;
-		temp = *curr;
-		*curr = *next;
-		*next = temp;
+		std::swap(*curr, *next);
 		sortPairsContainer(pairs);
 	}
 }
 
+// void bubbleSortPairsContainer(std::vector<std::pair<int, int> >& pairs) {
+//     bool swapped;
+//     for (size_t i = 0; i < pairs.size(); i++) {
+//         swapped = false;
+//         for (size_t j = 0; j < pairs.size() - i - 1; j++) {
+//             if (pairs[j].first > pairs[j + 1].first) {
+//                 std::swap(pairs[j], pairs[j + 1]);
+//                 swapped = true;
+//             }
+//         }
+//         if (!swapped) {
+//             break;  // Array is sorted
+//         }
+//     }
+// }
+
 void createS(std::vector<std::pair<int, int> > *pairs, std::vector<int> *S, std::vector<int> *pend) {
-	for (size_t i = 0; i < pairs->size(); i++)
+	for (size_t i = 0; i < pairs->size(); i++) 
 		S->push_back((*pairs)[i].first);
 	for (size_t i = 0; i < pairs->size(); i++)
 		pend->push_back((*pairs)[i].second);
@@ -89,7 +103,8 @@ void createJacobsthalSequence(std::vector<int> *vec, std::vector<int> *jacob) {
 	size_t b = 1;
 	size_t temp;
 	std::cout << "Creating Jacobsthal number sequence..." << std::endl;
-	jacob->push_back(b);
+	//push with -1 so it takes into account that count starts at 0
+	jacob->push_back(b - 1);
 	// std::cout << "vec[" << "0" << "]" << (*vec)[b] << std::endl;
 	for (size_t i = 1; i < vec->size(); i++) {
 		temp = b;
@@ -97,7 +112,7 @@ void createJacobsthalSequence(std::vector<int> *vec, std::vector<int> *jacob) {
 		a = temp;
 		if (b > vec->size())
 			break;
-		jacob->push_back(b);
+		jacob->push_back(b - 1);
 		// std::cout << "vec[" << i << "]" << (*vec)[b] << std::endl;
 	}
 	std::cout << "jacob numbers: ";
@@ -193,15 +208,14 @@ void binaryInsertion(std::vector<int> *S, std::vector<int> *pend, std::vector<in
 	//Putting jacobsthal elements at the beginning of pend
 	while (!jacob->empty()) {
 		int index = 1;
-		printElements(*pend);
+		// printElements(*pend);
 		(*pend).insert((*pend).begin(), (*pend)[jacob->back() - 1]);
-		printElements(*pend);
+		// printElements(*pend);
 		(*pend).erase((*pend).begin() + jacob->back() - 1 + index, (*pend).begin() + (jacob->back() - 1 + index + 1));
 		jacob->pop_back();
 		index++;
-		printElements(*jacob);
+		// printElements(*jacob);
 	}
-	std::cout << "still good" << std::endl;
 	printElements(*pend);
 	while (!pend->empty())
 	{
@@ -274,15 +288,15 @@ void algorithm(std::vector<int> *vec, std::deque<int> *deq) {
 
 	sortPairs(&pairs);
 	std::cout << "Sorted pairs bigger > smaller" << std::endl;
-	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++) {
-		// std::cout << "pair: " << it->first << " | " << it->second << std::endl;
-	}
+	// for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++) {
+	// 	std::cout << "pair: " << it->first << " | " << it->second << std::endl;
+	// }
 
 	sortPairsContainer(&pairs);
 	std::cout << "Sort pairs container by bigger" << std::endl;
-	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++) {
-		// std::cout << "pair: " << it->first << " | " << it->second << std::endl;
-	}
+	// for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++) {
+	// 	std::cout << "pair: " << it->first << " | " << it->second << std::endl;
+	// }
 
 	createS(&pairs, &S, &pend);
 	std::cout << "Put bigger in S, smaller and straggler in pend" << std::endl;
