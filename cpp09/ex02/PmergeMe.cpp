@@ -59,36 +59,19 @@ void sortPairs(std::vector<std::pair<int, int> > *pairs) {
 	}
 }
 
-void sortPairsContainer(std::vector<std::pair<int, int> > *pairs) {
-	std::pair<int, int> temp;
-	std::vector<std::pair<int, int> >::iterator curr;
-	std::vector<std::pair<int, int> >::iterator next;
-	for (std::vector<std::pair<int, int> >::iterator it = pairs->begin(); it != pairs->end() - 1;) {
-		curr = it;
-		it++;
-		next = it;
-		if (curr->first < next->first)
-			continue;
-		std::swap(*curr, *next);
-		sortPairsContainer(pairs);
-	}
+void sortPairsContainer(std::vector<std::pair<int, int> >* pairs) {
+    bool swapped;
+    do {
+        swapped = false;
+        for (std::vector<std::pair<int, int> >::iterator it = pairs->begin(); it != pairs->end() - 1; ++it) {
+            std::vector<std::pair<int, int> >::iterator next = it + 1;
+            if (it->first > next->first) {
+                std::swap(*it, *next);
+                swapped = true;
+            }
+        }
+    } while (swapped);
 }
-
-// void bubbleSortPairsContainer(std::vector<std::pair<int, int> >& pairs) {
-//     bool swapped;
-//     for (size_t i = 0; i < pairs.size(); i++) {
-//         swapped = false;
-//         for (size_t j = 0; j < pairs.size() - i - 1; j++) {
-//             if (pairs[j].first > pairs[j + 1].first) {
-//                 std::swap(pairs[j], pairs[j + 1]);
-//                 swapped = true;
-//             }
-//         }
-//         if (!swapped) {
-//             break;  // Array is sorted
-//         }
-//     }
-// }
 
 void createS(std::vector<std::pair<int, int> > *pairs, std::vector<int> *S, std::vector<int> *pend) {
 	for (size_t i = 0; i < pairs->size(); i++) 
@@ -119,93 +102,55 @@ void createJacobsthalSequence(std::vector<int> *vec, std::vector<int> *jacob) {
 	printElements(*jacob);
 }
 
-void bi(std::vector<int> *S, std::vector<int> *pend, std::vector<int> *jacob, int *mid, int *left, int *right, int *n) {
-	(void)jacob;
-	// std::cout << "pend->front() " << pend->front() << std::endl;
-	if (( *left == 0 && pend->front() < (*S)[*left]) || (*right == (*n - 1) && pend->front() > (*S)[*right]) || (pend->front() > (*S)[*left] && pend->front() < (*S)[*mid]) || (pend->front() < (*S)[*right] && pend->front() > (*S)[*mid]))
-	{
-		// std::cout << "Found insertion placemement for [" << pend->front() << "]" << std::endl;
-		// std::cout << "n "  << *n << std::endl;
-		// std::cout << "*left "  << (*S)[*left] << std::endl;
-		// std::cout << "*right "  << (*S)[*right] << std::endl;
-		// std::cout << "Last pend[0] < S[*left] " << "*mid: " << *mid << "p" << (*S)[*mid] << std::endl;
-
-		if (pend->front() < (*S)[*left]) {
-			//std::cout << "1=====" << std::endl;
-			S->insert(S->begin() + *left, pend->front());
-		}
-		else if (pend->front() > (*S)[*right]) {
-			//std::cout << "2=====" << std::endl;
-			//std::cout << "inserting: " << pend->front() << std::endl;
-			//std::cout << "*mid" << (*S)[*mid] << std::endl;
-			//std::cout << "*right" << (*S)[*right] << std::endl;
-			S->insert(S->begin() + *right + 1, pend->front());
-		}
-		else if (pend->front() > (*S)[*left] && pend->front() < (*S)[*mid]) {
-			//std::cout << "3=====" << std::endl;
-			//std::cout << "inserting: " << pend->front() << std::endl;
-			//std::cout << "*mid" << (*S)[*mid] << std::endl;
-			//std::cout << "*right" << (*S)[*right] << std::endl;
-			S->insert(S->begin() + *mid, pend->front());
-		}
-		else if (pend->front() < (*S)[*right] && pend->front() > (*S)[*mid]) {
-
-			S->insert(S->begin() + *mid + 1, pend->front());
-		}
-		else
-			S->insert(S->begin() + *mid, pend->front());
-		pend[0].erase(pend->begin(), pend->begin() + 1);
-		*n = S->size();
-		if (*n % 2 != 0)
-			*mid = std::max(*n - 2, *n / 2);
-		else
-			*mid = *n / 2;
-		*left = *mid - 1;
-		*right = *mid + 1;
-		// printElements(*S);
-		// bi(S, pend, jacob, *mid, *left, *right, n);
-		return;
+std::vector<int>::iterator binarySearch(std::vector<int> *S, int item, std::vector<int>::iterator low, std::vector<int>::iterator high) {
+	(void)*S;
+	while (low < high) {
+		std::vector<int>::iterator mid = low + (std::distance(low, high) / 2);
+		if (item == *mid)
+			return (mid);
+		else if (item > *mid)
+			low = mid + 1;
+		else high = mid;
 	}
-	else if (pend->front() < (*S)[*left]) {
-		if (*left < *n / 2)
-		{
-			*mid = std::max(*left, std::min(1, *left / 2));
-			*left = *mid - 1;
-			*right = *mid + 1;
-		}
-		else {
-			*mid = std::max(*left, std::min((*n / 2), (*n / 2 + *left) / 2));
-			*left = *mid - 1;
-			*right = *mid + 1;
-		}
-	}
-	else if (pend->front() > (*S)[*right]) {
-		if (*right < *n / 2)
-		{
-			*mid = std::max((*n / 2 - 1), std::min(*right, ((*n / 2) + *right) / 2));
-			*left = *mid - 1;
-			*right = *mid + 1;
-		}
-		else {
-			*mid = std::max(*n - 2, std::min(*right, (*right + *n) / 2 - 1));
-			*left = *mid - 1;
-			*right = *mid + 1;
-		}
-	}
-	// std::cout << "pend size: " << pend->size() << std::endl;
+	return (low);
 }
 
+void bi(std::vector<int> *S, std::vector<int> *pend) {
+	
+	// size_t i;
+	std::vector<int>::iterator pos;
+	// int j;
+	// int selected;
+	std::vector<int>::iterator it = pend->begin();
+	// int n = sizeof(*pend) / sizeof((*pend)[0]);
+
+	while (it != pend->end()) {
+		std::vector<int>::iterator lowerbound = S->begin();
+		std::vector<int>::iterator upperbound = S->end();
+
+		pos = binarySearch(S, *it, lowerbound, upperbound);
+		// std::cout << "S: ";
+		// printElements(*S);
+		// std::cout << "Inserting: " << *it << std::endl;
+		// std::cout << "pos: " << *pos << std::endl;
+
+		S->insert(pos, *it);
+		it++;
+	}
+}
+
+
 void binaryInsertion(std::vector<int> *S, std::vector<int> *pend, std::vector<int> *jacob) {
-	// (void)jacob;
-	int n = S->size();
-	int mid;
-	if (S->size() % 2 != 0)
-		mid = n / 2 + 1;
-	else
-		mid = n / 2;
-	int left = mid - 1;
-	int right = mid + 1;
+	// int n = S->size();
+	// int mid;
+	// if (S->size() % 2 != 0)
+	// 	mid = n / 2 + 1;
+	// else
+	// 	mid = n / 2;
+	// int left = mid - 1;
+	// int right = mid + 1;
 	//Putting jacobsthal elements at the beginning of pend
+	// std::cout << "putting jacob elements at the beginning of pend" << std::endl;
 	while (!jacob->empty()) {
 		int index = 1;
 		// printElements(*pend);
@@ -216,18 +161,21 @@ void binaryInsertion(std::vector<int> *S, std::vector<int> *pend, std::vector<in
 		index++;
 		// printElements(*jacob);
 	}
+	// std::cout << "FINISHED putting jacob elements at the beginning of pend" << std::endl;
 	printElements(*pend);
-	while (!pend->empty())
-	{
+	// std::cout << "binary sorting elements of pend in S" << std::endl;
+	// while (!pend->empty())
+	// {
 		//std::cout << "Searching insertion placemement for [" << pend->front() << "]" << std::endl;
 		//std::cout << "n "  << n << std::endl;
 		//std::cout << "left "  << (*S)[left] << std::endl;
 		//std::cout << "mid "  << (*S)[mid] << std::endl;
 		//std::cout << "right "  << (*S)[right] << std::endl;
 		//printElements(*S);
-		bi(S, pend, jacob, &mid, &left, &right, &n);
+	bi(S, pend);
 		
-	}
+	// }
+	// std::cout << "FINISHED binary sorting elements of pend in S" << std::endl;
 }
 
 std::vector<int> *insertElements(std::vector<int> *S, std::vector<int> *pend) {
