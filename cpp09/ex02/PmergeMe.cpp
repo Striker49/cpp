@@ -144,7 +144,7 @@ void bi(T *S, T pend) {
 
 template <typename T>
 void binaryInsertion(T *S, T pend, T jacob) {
-    while (!jacob.empty()) {
+    while (!jacob.empty() && !pend.empty()) {
         int jacobVal = *(jacob.rbegin());
 		//index to shift the number of elements inserted at the beginning when deleting
 		int index = 1; 
@@ -226,7 +226,6 @@ void vectorOperation(std::vector<int> *vec) {
 	// printElements(S);
 	// std::cout << "Pend elements" << std::endl;
 	// printElements(pend);
-
 	vec = insertElements(&S, pend);
 	double vecEndTime = clock();
 	// std::cout << "Insert pend elements in S" << std::endl;
